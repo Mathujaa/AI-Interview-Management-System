@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Interview Management System — Enterprise Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+    <div class="app-wrapper">
+        <!-- =============================================================
+             1. HORIZONTAL TOP NAVIGATION BAR (NO SIDEBAR)
+             ============================================================= -->
+        <header class="top-navbar">
+            <!-- Left: Four-Square Logo & Branding -->
+            <div class="nav-brand-group" onclick="navigateTo('dashboard')">
+                <div class="four-square-logo" title="AI Interview System">
+                    <span class="sq-1"></span>
+                    <span class="sq-2"></span>
+                    <span class="sq-3"></span>
+                    <span class="sq-4"></span>
+                </div>
+                <div class="brand-text">
+                    AI Interview <span>System</span>
+                </div>
+            </div>
+
+            <!-- Center Navigation Menu -->
+            <nav class="nav-center-menu" id="navCenterMenu">
+                <a href="#dashboard" id="nav-dashboard" class="nav-link-item active">
+                    Overview
+                </a>
+                <a href="#candidates" id="nav-candidates" class="nav-link-item">
+                    Candidates
+                </a>
+                <a href="#interviews" id="nav-interviews" class="nav-link-item">
+                    Interviews
+                </a>
+                <a href="#feedback" id="nav-feedback" class="nav-link-item">
+                    Feedback
+                </a>
+                <a href="#predictions" id="nav-predictions" class="nav-link-item">
+                    Predictions
+                </a>
+                <a href="#reports" id="nav-reports" class="nav-link-item">
+                    Reports
+                </a>
+                <a href="#recruiters" id="nav-recruiters" class="nav-link-item admin-only-tab" style="display:none;">
+                    Recruiters
+                </a>
+            </nav>
+
+            <!-- Right: Notifications, Admin Profile Pill & Actions -->
+            <div class="nav-right-group">
+                <div class="notifications-wrapper" style="position:relative;">
+                    <button type="button" class="nav-icon-btn" id="notificationsBellBtn" title="System Notifications">
+                        <span>🔔</span>
+                        <span class="nav-icon-badge" id="notificationsBadge" style="display:none;">0</span>
+                    </button>
+                    <!-- Dropdown Panel -->
+                    <div class="notifications-dropdown" id="notificationsDropdown" style="display:none;">
+                        <div class="notifications-header">
+                            <h4>Notifications</h4>
+                            <button type="button" id="markAllReadBtn" class="btn-link-sm">Mark all read</button>
+                        </div>
+                        <div class="notifications-list" id="notificationsList">
+                            <div class="empty-notif">No new notifications</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-profile-pill">
+                    <div class="avatar-circle" id="headerAvatarCircle">AD</div>
+                    <div class="nav-user-info">
+                        <span class="nav-username" id="headerUsername">Admin</span>
+                        <span class="nav-role-badge" id="headerUserRole">ADMIN</span>
+                    </div>
+                </div>
+
+                <button type="button" id="nav-logout" class="nav-logout-btn" title="Sign Out of Portal">
+                    <span>🚪</span> Sign Out
+                </button>
+
+                <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" title="Toggle Menu">
+                    ☰
+                </button>
+            </div>
+        </header>
+
+        <!-- =============================================================
+             2. MAIN CONTENT CANVAS
+             ============================================================= -->
+        <main class="main-canvas">
+            <!-- Global Page Header (Welcome message, Date Filter) -->
+            <div class="page-header-row">
+                <div class="page-title-group">
+                    <h1 id="pageTitle">Recruitment Operations Dashboard</h1>
+                    <div class="page-welcome-sub" id="headerSubtitle">
+                        Good morning, <strong id="welcomeUserGreeting">Admin</strong> 👋 &bull; Real-time recruitment
+                        analytics and evaluation pipeline
+                    </div>
+                </div>
+
+                <div class="page-header-actions">
+                    <button type="button" class="btn-export-report" id="btnExportReport" title="Export recruitment report data">
+                        <span>📥</span> Export Report
+                    </button>
+                    <div class="date-filter-pill" title="Filter dashboard by date range">
+                        <span>📅</span>
+                        <select id="dateFilterSelect" class="date-filter-select" aria-label="Filter dashboard by date range">
+                            <option value="7">Last 7 Days</option>
+                            <option value="30" selected>Last 30 Days</option>
+                            <option value="90">Last 90 Days</option>
+                            <option value="all">All Time</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Global Toast / Alert Banner -->
+            <div id="statusAlert" class="alert"></div>
+
+            <!-- Hidden compatibility storage for legacy JS stat hooks -->
+            <div class="hidden-stats-storage">
+                <span id="stat-completed-interviews">0</span>
+                <span id="stat-pending-interviews">0</span>
+                <span id="stat-selected-candidates">0</span>
+                <span id="stat-rejected-candidates">0</span>
+            </div>
+
+            <!-- =============================================================
+                 SECTION 1: OVERVIEW DASHBOARD (Operations Grid + Pipeline & Activity)
+                 ============================================================= -->
+            <section id="section-dashboard" class="content-section active">
+                <!-- TOP KPI GRID: 9 Core Metrics Required for Admin Overview -->
+                <div class="kpi-grid-ops" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; margin-bottom: 24px;">
+                    <!-- KPI 1: Total Candidates -->
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <span class="kpi-title">Total Candidates</span>
+                            <div class="kpi-icon-chip kpi-icon-blue">👥</div>
+                        </div>
+                        <div class="kpi-value" id="stat-total-candidates">0</div>
+                        <div class="kpi-footer">
+                            <span class="kpi-trend-pill positive">Talent Pool</span>
+                            <span>All registrations</span>
+                        </div>
+                    </div>
+
+                    <!-- KPI 2: Applied Candidates -->
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <span class="kpi-title">Applied</span>
+                            <div class="kpi-icon-chip kpi-icon-blue">📥</div>
+                        </div>
+                        <div class="kpi-value" id="stat-applied-candidates">0</div>
+                        <div class="kpi-footer">
+                            <span class="kpi-trend-pill neutral">Initial stage</span>
+                            <span>Awaiting screening</span>
+                        </div>
+                    </div>
+
+                    <!-- KPI 3: Shortlisted Candidates -->
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <span class="kpi-title">Shortlisted</span>
+                            <div class="kpi-icon-chip kpi-icon-blue">⭐</div>
+                        </div>
+                        <div class="kpi-value" id="stat-shortlisted-candidates">0</div>
+                        <div class="kpi-footer">
+                            <span class="kpi-trend-pill positive">Screened</span>
+                            <span>Ready for rounds</span>
+                        </div>
+                    </div>
+
+                    <!-- KPI 4: Scheduled Interviews -->
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <span class="kpi-title">Scheduled Interviews</span>
+                            <div class="kpi-icon-chip kpi-icon-amber">📅</div>
+                        </div>
+                        <div class="kpi-value" id="stat-scheduled-interviews">0</div>
+                        <div class="kpi-footer">
+                            <span class="kpi-trend-pill neutral">Upcoming</span>
+                            <span>Active rounds</span>
+                        </div>
+                    </div>
+
+                    <!-- KPI 5: Completed Interviews -->
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <span class="kpi-title">Completed Interviews</span>
+                            <div class="kpi-icon-chip kpi-icon-purple">✓</div>
+                        </div>
+                        <div class="kpi-value" id="stat-completed-interviews">0</div>
+                        <div class="kpi-footer">
+                            <span class="kpi-trend-pill positive">Finished</span>
+                            <span>Concluded sessions</span>
+                        </div>
+                    </div>
+
+                    <!-- KPI 6: Selected Candidates -->
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <span class="kpi-title">Selected</span>
+                            <div class="kpi-icon-chip kpi-icon-green">🎯</div>
+                        </div>
+                        <div class="kpi-value" id="stat-selected-candidates">0</div>
+                        <div class="kpi-footer">
+                            <span class="kpi-trend-pill positive">Hired</span>
+                            <span>Successful offers</span>
+                        </div>
+                    </div>
+
+                    <!-- KPI 7: Rejected Candidates -->
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <span class="kpi-title">Rejected</span>
+                            <div class="kpi-icon-chip kpi-icon-red">✗</div>
+                        </div>
+                        <div class="kpi-value" id="stat-rejected-candidates">0</div>
+                        <div class="kpi-footer">
+                            <span class="kpi-trend-pill neutral">Closed</span>
+                            <span>Disqualified pool</span>
+                        </div>
+                    </div>
+
+                    <!-- KPI 8: Total Recruiters -->
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <span class="kpi-title">Total Recruiters</span>
+                            <div class="kpi-icon-chip kpi-icon-purple">👤</div>
+                        </div>
+                        <div class="kpi-value" id="stat-total-recruiters">0</div>
+                        <div class="kpi-footer">
+                            <span class="kpi-trend-pill positive">Evaluators</span>
+                            <span>Active team</span>
+                        </div>
+                    </div>
+
+                    <!-- KPI 9: Pending Feedback -->
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <span class="kpi-title">Pending Feedback</span>
+                            <div class="kpi-icon-chip kpi-icon-amber">📝</div>
+                        </div>
+                        <div class="kpi-value" id="stat-pending-feedback">0</div>
+                        <div class="kpi-footer">
+                            <span class="kpi-trend-pill neutral">Awaiting</span>
+                            <span>Completed rounds</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TWO-COLUMN DASHBOARD OVERVIEW (Balanced Layout) -->
+                <div class="dashboard-2col">
+                    <!-- COLUMN 1 (LEFT): Recruitment Pipeline Health -->
+                    <div class="white-card">
+                        <div class="card-header-clean">
+                            <h3>Recruitment Pipeline Health</h3>
+                            <span class="pipeline-total-badge" id="pipelineActiveTotalBadge">0 Candidates Total</span>
+                        </div>
+
+                        <!-- Horizontal Segmented Progress Bar -->
+                        <div class="segmented-progress-bar" title="Overall Pipeline Distribution">
+                            <span class="seg-applied" id="seg-applied" style="width: 25%;"></span>
+                            <span class="seg-shortlisted" id="seg-shortlisted" style="width: 25%;"></span>
+                            <span class="seg-scheduled" id="seg-scheduled" style="width: 15%;"></span>
+                            <span class="seg-interviewed" id="seg-interviewed" style="width: 15%;"></span>
+                            <span class="seg-selected" id="seg-selected" style="width: 10%;"></span>
+                            <span class="seg-rejected" id="seg-rejected" style="width: 10%;"></span>
+                        </div>
+
+                        <!-- Stage by Stage Breakdown -->
+                        <div class="pipeline-flow-list">
+                            <!-- Applied -->
+                            <div class="pipeline-stage-row">
+                                <div class="stage-label-group">
+                                    <span class="stage-color-dot" style="background:#3B82C4;"></span>
+                                    <span>Applied</span>
+                                </div>
+                                <div class="stage-count-group">
+                                    <span class="stage-count-val" id="pipe-applied-count">0 (0%)</span>
+                                    <div class="stage-mini-bar-wrap">
+                                        <div class="stage-mini-bar" id="pipe-applied-bar"
+                                            style="background:#3B82C4; width:0%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Shortlisted -->
+                            <div class="pipeline-stage-row">
+                                <div class="stage-label-group">
+                                    <span class="stage-color-dot" style="background:#0EA5E9;"></span>
+                                    <span>Shortlisted</span>
+                                </div>
+                                <div class="stage-count-group">
+                                    <span class="stage-count-val" id="pipe-shortlisted-count">0 (0%)</span>
+                                    <div class="stage-mini-bar-wrap">
+                                        <div class="stage-mini-bar" id="pipe-shortlisted-bar"
+                                            style="background:#0EA5E9; width:0%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Scheduled -->
+                            <div class="pipeline-stage-row">
+                                <div class="stage-label-group">
+                                    <span class="stage-color-dot" style="background:#F59E0B;"></span>
+                                    <span>Scheduled</span>
+                                </div>
+                                <div class="stage-count-group">
+                                    <span class="stage-count-val" id="pipe-scheduled-count">0 (0%)</span>
+                                    <div class="stage-mini-bar-wrap">
+                                        <div class="stage-mini-bar" id="pipe-scheduled-bar"
+                                            style="background:#F59E0B; width:0%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Interviewed -->
+                            <div class="pipeline-stage-row">
+                                <div class="stage-label-group">
+                                    <span class="stage-color-dot" style="background:#8B5CF6;"></span>
+                                    <span>Interviewed</span>
+                                </div>
+                                <div class="stage-count-group">
+                                    <span class="stage-count-val" id="pipe-interviewed-count">0 (0%)</span>
+                                    <div class="stage-mini-bar-wrap">
+                                        <div class="stage-mini-bar" id="pipe-interviewed-bar"
+                                            style="background:#8B5CF6; width:0%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Selected -->
+                            <div class="pipeline-stage-row">
+                                <div class="stage-label-group">
+                                    <span class="stage-color-dot" style="background:#16A36A;"></span>
+                                    <span>Selected (Hired)</span>
+                                </div>
+                                <div class="stage-count-group">
+                                    <span class="stage-count-val" id="pipe-selected-count">0 (0%)</span>
+                                    <div class="stage-mini-bar-wrap">
+                                        <div class="stage-mini-bar" id="pipe-selected-bar"
+                                            style="background:#16A36A; width:0%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Rejected -->
+                            <div class="pipeline-stage-row">
+                                <div class="stage-label-group">
+                                    <span class="stage-color-dot" style="background:#E5484D;"></span>
+                                    <span>Rejected</span>
+                                </div>
+                                <div class="stage-count-group">
+                                    <span class="stage-count-val" id="pipe-rejected-count">0 (0%)</span>
+                                    <div class="stage-mini-bar-wrap">
+                                        <div class="stage-mini-bar" id="pipe-rejected-bar"
+                                            style="background:#E5484D; width:0%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COLUMN 2 (CENTER): AI Match Quality & Evaluator Metrics -->
+                    <div class="white-card">
+                        <div class="card-header-clean">
+                            <h3>AI Match Quality &amp; Scoring</h3>
+                            <span class="badge badge-shortlisted">Real Evaluation</span>
+                        </div>
+
+                        <div class="match-quality-summary">
+                            <div class="match-score-big" id="overallMatchQualityBig">88%</div>
+                            <div class="match-score-label">Overall Match Index</div>
+                        </div>
+
+                        <div class="analytics-meters-list">
+                            <!-- Interview Completion Rate -->
+                            <div class="meter-item">
+                                <div class="meter-meta">
+                                    <span>Interview Completion Rate</span>
+                                    <span id="analytics-completion-rate">0%</span>
+                                </div>
+                                <div class="meter-track">
+                                    <div class="meter-fill" id="meterCompletionFill"
+                                        style="background:var(--primary-blue); width:0%;"></div>
+                                </div>
+                            </div>
+
+                            <!-- Candidate Selection Ratio -->
+                            <div class="meter-item">
+                                <div class="meter-meta">
+                                    <span>Candidate Selection Ratio</span>
+                                    <span id="analytics-selection-rate">0%</span>
+                                </div>
+                                <div class="meter-track">
+                                    <div class="meter-fill" id="meterSelectionFill"
+                                        style="background:var(--status-green); width:0%;"></div>
+                                </div>
+                            </div>
+
+                            <!-- Technical Competency -->
+                            <div class="meter-item">
+                                <div class="meter-meta">
+                                    <span>Evaluator Technical Rating</span>
+                                    <span id="meterTechAvg">8.5 / 10</span>
+                                </div>
+                                <div class="meter-track">
+                                    <div class="meter-fill" style="background:var(--secondary-blue); width:85%;"></div>
+                                </div>
+                            </div>
+
+                            <!-- Problem Solving Index -->
+                            <div class="meter-item">
+                                <div class="meter-meta">
+                                    <span>Problem Solving Competency</span>
+                                    <span id="meterProbAvg">8.4 / 10</span>
+                                </div>
+                                <div class="meter-track">
+                                    <div class="meter-fill" style="background:var(--status-purple); width:84%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- =============================================================
+                 SECTION 2: MANAGE CANDIDATES
+                 ============================================================= -->
+            <section id="section-candidates" class="content-section">
+                <!-- Candidate Directory Table Card -->
+                <div class="card">
+                    <div class="table-toolbar">
+                        <div>
+                            <h3>Candidate Directory</h3>
+                            <p class="card-subtitle" style="margin-bottom:0;">Active candidate profiles with real-time
+                                recruitment progression status</p>
+                        </div>
+                        <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                            <div class="search-input-group">
+                                <span class="search-icon-chip">🔍</span>
+                                <input type="text" id="candSearchInput" placeholder="Search by name or email..." />
+                            </div>
+                            <select id="candStatusFilter">
+                                <option value="">All Statuses</option>
+                                <option value="applied">Applied</option>
+                                <option value="shortlisted">Shortlisted</option>
+                                <option value="scheduled">Scheduled</option>
+                                <option value="interviewed">Interviewed</option>
+                                <option value="selected">Selected</option>
+                                <option value="rejected">Rejected</option>
+                            </select>
+                            <button type="button" class="button btn-secondary btn-sm" onclick="loadCandidates()">
+                                <span>↻</span> Refresh
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Candidate ID</th>
+                                    <th>Candidate Name</th>
+                                    <th>Email Address</th>
+                                    <th>Assigned Recruiter</th>
+                                    <th>Status</th>
+                                    <th style="text-align:right;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="candidatesTableBody">
+                                <tr>
+                                    <td colspan="6" style="text-align:center; color:#718096; padding:24px;">Loading
+                                        candidates...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =============================================================
+                 SECTION 3: SCHEDULE INTERVIEWS
+                 ============================================================= -->
+            <section id="section-interviews" class="content-section">
+                <!-- Schedule Session Card -->
+                <div class="card">
+                    <div class="card-header-bar">
+                        <div>
+                            <h3>Schedule Interview Session</h3>
+                            <p class="card-subtitle" style="margin-bottom:0;">Book candidate interview rounds and assign
+                                internal evaluators</p>
+                        </div>
+                    </div>
+                    <form id="scheduleInterviewForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="interviewCandidateSelect">Candidate <span
+                                        class="required-star">*</span></label>
+                                <select id="interviewCandidateSelect" required>
+                                    <option value="">-- Select Candidate --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="interviewInterviewerSelect">Assigned Evaluator (Recruiter) <span class="required-star">*</span></label>
+                                <select id="interviewInterviewerSelect" required>
+                                    <option value="">-- Select Recruiter / Evaluator --</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="interviewDateTime">Date &amp; Time <span
+                                        class="required-star">*</span></label>
+                                <input type="datetime-local" id="interviewDateTime" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="interviewRound">Interview Round <span class="required-star">*</span></label>
+                                <input type="number" id="interviewRound" min="1" max="10" value="1" required />
+                            </div>
+                        </div>
+                        <div>
+                            <button type="submit" class="button" id="btnScheduleInterview">
+                                <span>📅</span> Schedule Interview Session
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Scheduled Interviews Table Card -->
+                <div class="card">
+                    <div class="table-toolbar">
+                        <div>
+                            <h3>Scheduled Interviews</h3>
+                            <p class="card-subtitle" style="margin-bottom:0;">Track upcoming and completed interview
+                                sessions</p>
+                        </div>
+                        <button type="button" class="button btn-secondary btn-sm" onclick="loadInterviews()">
+                            <span>↻</span> Refresh
+                        </button>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Session ID</th>
+                                    <th>Candidate</th>
+                                    <th>Evaluator</th>
+                                    <th>Scheduled Time</th>
+                                    <th>Round</th>
+                                    <th>Status</th>
+                                    <th style="text-align:right;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="interviewsTableBody">
+                                <tr>
+                                    <td colspan="7" style="text-align:center; color:#718096; padding:24px;">Loading
+                                        interviews...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =============================================================
+                 SECTION 4: RECRUITER EVALUATION FEEDBACK (READ ONLY)
+                 ============================================================= -->
+            <section id="section-feedback" class="content-section">
+                <div class="card">
+                    <div class="table-toolbar" style="flex-wrap:wrap; gap:14px;">
+                        <div>
+                            <div style="display:flex; align-items:center; gap:10px;">
+                                <h3>Recruiter Evaluation Feedback</h3>
+                                <span class="badge badge-applied" style="background:#EFF6FF; color:#1D4ED8; border:1px solid #BFDBFE;">🔒 READ ONLY</span>
+                            </div>
+                            <p class="card-subtitle" style="margin-top:4px; margin-bottom:0;">
+                                Read-only archive of verified evaluation scorecards submitted exclusively by designated interview evaluators across all rounds.
+                            </p>
+                        </div>
+                        <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                            <div class="search-input-group">
+                                <span class="search-icon-chip">🔍</span>
+                                <input type="text" id="fbSearchInput" placeholder="Search by candidate, email, or evaluator..." />
+                            </div>
+                            <select id="fbRoundFilter" style="border-radius: var(--radius-sm); border: 1px solid var(--border-color); padding: 8px 12px; font-size: 0.875rem;">
+                                <option value="">All Rounds</option>
+                                <option value="1">Round 1</option>
+                                <option value="2">Round 2</option>
+                                <option value="3">Round 3</option>
+                                <option value="4">Round 4</option>
+                                <option value="5">Round 5</option>
+                            </select>
+                            <button type="button" class="button btn-secondary btn-sm" onclick="loadFeedbackHistory()">
+                                <span>↻</span> Refresh
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Candidate</th>
+                                    <th>Session &amp; Round</th>
+                                    <th>Evaluator (Recruiter)</th>
+                                    <th>Technical</th>
+                                    <th>Communication</th>
+                                    <th>Problem Solving</th>
+                                    <th>Average</th>
+                                    <th>Strengths &amp; Growth Areas</th>
+                                    <th>Submitted</th>
+                                    <th style="text-align:right;">Scorecard</th>
+                                </tr>
+                            </thead>
+                            <tbody id="feedbackTableBody">
+                                <tr>
+                                    <td colspan="10" style="text-align:center; color:#718096; padding:28px;">Loading verified recruiter feedback records...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =============================================================
+                 SECTION 5: CANDIDATE PREDICTIONS (Machine Learning)
+                 ============================================================= -->
+            <section id="section-predictions" class="content-section" style="scroll-margin-top: 84px;">
+                <div class="card">
+                    <div class="card-header-bar">
+                        <div>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <h3>Machine Learning Selection Prediction</h3>
+                                <span class="badge badge-shortlisted">Random Forest Model</span>
+                            </div>
+                            <p class="card-subtitle" style="margin-top:4px; margin-bottom:0;">
+                                Uses the Scikit-learn Random Forest model to calculate objective candidate selection
+                                probabilities based on candidate profile attributes and verified interview evaluation scores.
+                            </p>
+                        </div>
+                    </div>
+
+                    <form id="predictionForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="predCandidateSelect">Target Candidate <span
+                                        class="required-star">*</span></label>
+                                <select id="predCandidateSelect" required onchange="handlePredictionCandidateChange()">
+                                    <option value="">-- Select Candidate --</option>
+                                </select>
+                                <div id="predCandidateSourceBadge" style="font-size:0.78rem; color:var(--secondary-text); margin-top:4px;"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="predEducation">Education Level <span class="required-star">*</span></label>
+                                <select id="predEducation" required>
+                                    <option value="highschool">High School</option>
+                                    <option value="bachelor" selected>Bachelor's Degree</option>
+                                    <option value="master">Master's Degree</option>
+                                    <option value="phd">PhD</option>
+                                </select>
+                                <small id="predEduSource" style="display:block; font-size:0.75rem; color:var(--muted-text); margin-top:3px;"></small>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="predSkillScore">Skill Score (1 - 10) <span
+                                        class="required-star">*</span></label>
+                                <input type="number" id="predSkillScore" min="1" max="10" placeholder="Enter score 1 - 10" required />
+                                <small id="predSkillScoreSource" style="display:block; font-size:0.75rem; color:var(--muted-text); margin-top:3px;">Manual recruiter assessment required</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="predExperience">Years of Experience (0 - 20) <span
+                                        class="required-star">*</span></label>
+                                <input type="number" id="predExperience" min="0" max="20" placeholder="0 - 20" required />
+                                <small id="predExpSource" style="display:block; font-size:0.75rem; color:var(--muted-text); margin-top:3px;"></small>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="predTechScore">Technical Score (1 - 10) <span
+                                        class="required-star">*</span></label>
+                                <input type="number" id="predTechScore" min="1" max="10" placeholder="1 - 10" required />
+                                <small id="predTechSource" style="display:block; font-size:0.75rem; color:var(--muted-text); margin-top:3px;"></small>
+                            </div>
+                            <div class="form-group">
+                                <label for="predCommRating">Communication Rating (1 - 10) <span
+                                        class="required-star">*</span></label>
+                                <input type="number" id="predCommRating" min="1" max="10" placeholder="1 - 10" required />
+                                <small id="predCommSource" style="display:block; font-size:0.75rem; color:var(--muted-text); margin-top:3px;"></small>
+                            </div>
+                            <div class="form-group">
+                                <label for="predPrevPerf">Previous Performance (1 - 10) <span
+                                        class="required-star">*</span></label>
+                                <input type="number" id="predPrevPerf" min="1" max="10" placeholder="1 - 10" required />
+                                <small id="predPerfSource" style="display:block; font-size:0.75rem; color:var(--muted-text); margin-top:3px;"></small>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+                            <button type="submit" class="button" id="btnPredict">
+                                <span>🔮</span> Calculate ML Prediction
+                            </button>
+                            <span id="predDataFreshnessNotice" style="font-size:0.8rem; color:var(--secondary-text);"></span>
+                        </div>
+                    </form>
+
+                    <!-- Prediction Result Display Box -->
+                    <div id="predictionResultBox" class="prediction-box" style="display:none; margin-top:20px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid var(--border-color);">
+                            <div>
+                                <h4 style="color:var(--dark-text); font-size:1.05rem; margin-bottom:2px;">Predicted Hiring Outcome</h4>
+                                <span style="font-size:0.82rem; color:var(--secondary-text);">Objective Model Probability Output</span>
+                            </div>
+                            <div>
+                                <strong id="predClassBadge" class="badge badge-shortlisted">Pending</strong>
+                            </div>
+                        </div>
+
+                        <!-- Advisory ML Disclaimer -->
+                        <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:6px; padding:10px 14px; margin-bottom:14px; font-size:0.82rem; color:#1E40AF; line-height:1.45;">
+                            ℹ️ <strong>Advisory ML Prediction:</strong> This assessment is generated algorithmically by the Random Forest model for decision support. It does not constitute a final hiring decision and does not alter the candidate's hiring status.
+                        </div>
+
+                        <!-- Probabilities Bars -->
+                        <div id="predProbabilitiesContainer"></div>
+
+                        <!-- Inputs used summary -->
+                        <div id="predInputsSummaryContainer" style="margin-top:14px; padding-top:12px; border-top:1px solid var(--border-color); font-size:0.8rem; color:var(--secondary-text);"></div>
+                    </div>
+
+                    <!-- Verified Model Pipeline Specifications Card -->
+                    <div style="margin-top:24px; background:#F8FAFC; border:1px solid var(--border-color); border-radius:8px; padding:18px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                            <h4 style="font-size:0.92rem; font-weight:700; color:var(--dark-navy); margin:0;">
+                                ⚙️ Trained Scikit-Learn Model Pipeline Specifications
+                            </h4>
+                            <span class="badge badge-shortlisted">RandomForest (200 Trees)</span>
+                        </div>
+                        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap:10px; font-size:0.8rem; color:var(--dark-text); margin-bottom:12px;">
+                            <div><strong>Algorithm:</strong> <code>RandomForestClassifier</code></div>
+                            <div><strong>Pipeline:</strong> <code>StandardScaler + OneHotEncoder</code></div>
+                            <div><strong>Artifact:</strong> <code>ML/model_pipeline.joblib</code></div>
+                            <div><strong>Dataset:</strong> 1,000 samples (80/20 Stratified Split)</div>
+                        </div>
+                        <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:10px; text-align:center;">
+                            <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:6px; padding:8px;">
+                                <div style="font-size:0.7rem; color:var(--muted-text); font-weight:700; letter-spacing:0.04em;">ACCURACY</div>
+                                <div style="font-size:1.15rem; font-weight:800; color:#1769C2;">94.0%</div>
+                            </div>
+                            <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:6px; padding:8px;">
+                                <div style="font-size:0.7rem; color:var(--muted-text); font-weight:700; letter-spacing:0.04em;">PRECISION</div>
+                                <div style="font-size:1.15rem; font-weight:800; color:#16A36A;">94.1%</div>
+                            </div>
+                            <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:6px; padding:8px;">
+                                <div style="font-size:0.7rem; color:var(--muted-text); font-weight:700; letter-spacing:0.04em;">RECALL</div>
+                                <div style="font-size:1.15rem; font-weight:800; color:#8B5CF6;">94.0%</div>
+                            </div>
+                            <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:6px; padding:8px;">
+                                <div style="font-size:0.7rem; color:var(--muted-text); font-weight:700; letter-spacing:0.04em;">F1-SCORE</div>
+                                <div style="font-size:1.15rem; font-weight:800; color:#0EA5E9;">94.0%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =============================================================
+                 SECTION 6: AI REPORTS (Generative AI)
+                 ============================================================= -->
+            <section id="section-reports" class="content-section" style="scroll-margin-top: 84px;">
+                <div class="card">
+                    <div class="card-header-bar">
+                        <div>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <h3>Generative AI Candidate Evaluation Report</h3>
+                                <span class="badge badge-applied">LLM Synthesis</span>
+                            </div>
+                            <p class="card-subtitle" style="margin-top:4px; margin-bottom:0;">
+                                Generates comprehensive executive synthesis across all interview rounds, evaluator
+                                comments, and strengths.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="form-row" style="align-items:flex-end;">
+                        <div class="form-group" style="flex:1;">
+                            <label for="reportCandidateSelect">Target Candidate <span
+                                    class="required-star">*</span></label>
+                            <select id="reportCandidateSelect">
+                                <option value="">-- Select Candidate --</option>
+                            </select>
+                        </div>
+                        <div style="display:flex; gap:10px; margin-bottom:14px; flex-wrap:wrap;">
+                            <button type="button" class="button" id="btnGenerateReport">
+                                <span>🤖</span> Generate AI Report
+                            </button>
+                            <button type="button" class="button btn-secondary" id="btnViewReport">
+                                <span>📄</span> Fetch Latest Report
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- AI Report Display Box (with Print Support) -->
+                    <div id="reportDisplayCard" class="report-box" style="display:none;">
+                        <div class="report-header">
+                            <div>
+                                <h3 id="reportCandName" style="color:var(--dark-text); margin-bottom:3px;">Candidate
+                                    Report</h3>
+                                <small id="reportDate" style="color:var(--muted-text);"></small>
+                            </div>
+                            <div style="display:flex; gap:10px; align-items:center;">
+                                <span id="reportRecBadge" class="badge badge-applied">RECOMMENDED</span>
+                                <button type="button" class="button btn-secondary btn-sm" onclick="window.print()"
+                                    title="Print report or save as PDF">
+                                    <span>🖨️</span> Print Report
+                                </button>
+                            </div>
+                        </div>
+                        <div id="reportContentArea"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =============================================================
+                 SECTION 7: RECRUITER MANAGEMENT (ADMIN ONLY)
+                 ============================================================= -->
+            <section id="section-recruiters" class="content-section">
+                <div class="section-card">
+                    <div class="section-card-header">
+                        <div>
+                            <h2 class="section-card-title">Recruiter Management</h2>
+                            <p class="section-card-subtitle">Manage recruiter credentials and team member access</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Provision Recruiter Form -->
+                    <div class="table-toolbar" style="margin-bottom: 20px;">
+                        <form id="createRecruiterForm" style="display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end; width:100%;">
+                            <div style="flex:1; min-width:200px;">
+                                <label for="recruiterUsername" style="display:block; font-size:0.82rem; font-weight:600; margin-bottom:4px;">Recruiter Username</label>
+                                <input type="text" id="recruiterUsername" placeholder="e.g. recruiter_sarah" required style="width:100%; height:38px; padding:0 12px; border:1px solid var(--border-color); border-radius:var(--radius-input);" />
+                            </div>
+                            <div style="flex:1; min-width:200px;">
+                                <label for="recruiterPassword" style="display:block; font-size:0.82rem; font-weight:600; margin-bottom:4px;">Temporary Password</label>
+                                <input type="password" id="recruiterPassword" placeholder="Minimum 6 characters" required style="width:100%; height:38px; padding:0 12px; border:1px solid var(--border-color); border-radius:var(--radius-input);" />
+                            </div>
+                            <div>
+                                <button type="submit" class="button" id="btnCreateRecruiter" style="height:38px;">
+                                    + Add Recruiter Account
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Recruiters List Table -->
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Recruiter ID</th>
+                                    <th>Username</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th style="text-align:right;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recruitersTableBody">
+                                <tr><td colspan="5" style="text-align:center; color:#718096; padding:24px;">Loading recruiters...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Edit Candidate Modal Dialog -->
+    <div id="editCandidateModal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Edit Candidate Profile</h3>
+                <button type="button" class="modal-close" onclick="closeEditModal()">&times;</button>
+            </div>
+            <form id="editCandidateForm">
+                <input type="hidden" id="editCandId" />
+                <div class="form-group">
+                    <label for="editCandName">Full Name <span class="required-star">*</span></label>
+                    <input type="text" id="editCandName" required />
+                </div>
+                <div class="form-group">
+                    <label for="editCandEmail">Email Address <span class="required-star">*</span></label>
+                    <input type="email" id="editCandEmail" required />
+                </div>
+                <div class="form-group">
+                    <label for="editCandPhone">Phone Number</label>
+                    <input type="text" id="editCandPhone" />
+                </div>
+                <div class="form-group">
+                    <label for="editCandStatus">Application Status</label>
+                    <select id="editCandStatus">
+                        <option value="applied">Applied</option>
+                        <option value="shortlisted">Shortlisted</option>
+                        <option value="scheduled">Scheduled</option>
+                        <option value="interviewed">Interviewed</option>
+                        <option value="selected">Selected</option>
+                        <option value="rejected">Rejected</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editCandRemarks">Status Transition Remarks / Notes</label>
+                    <input type="text" id="editCandRemarks" placeholder="e.g. Candidate cleared round 1 technical interview" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="button btn-secondary" onclick="closeEditModal()">Cancel</button>
+                    <button type="submit" class="button" id="btnSaveEditCandidate">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Candidate Status History Timeline Modal -->
+    <div id="statusHistoryModal" class="modal-overlay">
+        <div class="modal" style="max-width: 540px;">
+            <div class="modal-header">
+                <h3 id="historyModalTitle">Candidate Recruitment Lifecycle</h3>
+                <button type="button" class="modal-close" onclick="closeStatusHistoryModal()">&times;</button>
+            </div>
+            <div id="statusHistoryBody" style="padding: 16px 20px; max-height: 440px; overflow-y: auto;">
+                <p style="color:var(--secondary-text);">Loading progression history...</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="button btn-secondary" onclick="closeStatusHistoryModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Report Modal Dialog -->
+    <div id="exportReportModal" class="modal-overlay">
+        <div class="modal" style="max-width: 580px;">
+            <div class="modal-header">
+                <h3>Export Recruitment Operations Report</h3>
+                <button type="button" class="modal-close" onclick="closeExportModal()">&times;</button>
+            </div>
+            <div style="padding: 20px;">
+                <p style="color:var(--secondary-text); margin-bottom: 18px; font-size: 0.9rem;">
+                    Generate comprehensive report records including candidate progression, evaluation scores, and recruitment recommendations directly from the database.
+                </p>
+                <div style="display:flex; gap:16px; margin-bottom: 20px;">
+                    <div style="flex:1;">
+                        <label for="exportDateRange" style="display:block; font-size:0.82rem; font-weight:600; margin-bottom:6px;">Date Filter</label>
+                        <select id="exportDateRange" style="width:100%; height:40px; padding:0 12px; border:1px solid var(--border-color); border-radius:var(--radius-input);">
+                            <option value="7">Last 7 Days</option>
+                            <option value="30" selected>Last 30 Days</option>
+                            <option value="90">Last 90 Days</option>
+                            <option value="all">All Time</option>
+                        </select>
+                    </div>
+                    <div style="flex:1;">
+                        <label for="exportStatusFilter" style="display:block; font-size:0.82rem; font-weight:600; margin-bottom:6px;">Status Filter</label>
+                        <select id="exportStatusFilter" style="width:100%; height:40px; padding:0 12px; border:1px solid var(--border-color); border-radius:var(--radius-input);">
+                            <option value="all" selected>All Statuses</option>
+                            <option value="applied">Applied</option>
+                            <option value="shortlisted">Shortlisted</option>
+                            <option value="scheduled">Scheduled</option>
+                            <option value="interviewed">Interviewed</option>
+                            <option value="selected">Selected</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="exportPreviewArea" style="background:#F8FAFC; border:1px solid var(--border-color); border-radius:8px; padding:12px; margin-bottom:20px; font-size:0.85rem; color:var(--dark-navy);">
+                    Calculating records...
+                </div>
+
+                <div style="display:flex; gap:12px; justify-content:flex-end;">
+                    <button type="button" class="button btn-secondary" id="btnExportPrint">
+                        🖨️ Printable Summary
+                    </button>
+                    <button type="button" class="button" id="btnExportCsv">
+                        📥 Download CSV File
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final Hiring Decision Modal Dialog -->
+    <div id="decisionModal" class="modal-overlay">
+        <div class="modal" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3 id="decisionModalTitle">Final Hiring Decision</h3>
+                <button type="button" class="modal-close" onclick="closeDecisionModal()">&times;</button>
+            </div>
+            <form id="decisionForm">
+                <input type="hidden" id="decisionCandId" />
+                <input type="hidden" id="decisionAction" />
+                <div style="padding: 16px 20px 0;">
+                    <p style="font-size: 0.95rem; color: var(--dark-navy); margin-bottom: 14px; font-weight: 600;" id="decisionCandidatePrompt">
+                        Are you sure you want to finalize the hiring decision?
+                    </p>
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label for="decisionRemarks">Decision Remarks &amp; Justification <span class="required-star">*</span></label>
+                        <textarea id="decisionRemarks" rows="3" placeholder="Enter evaluation summary or justification for audit log..." required style="width: 100%; border-radius: 8px; border: 1px solid var(--border-color); padding: 10px; font-family: inherit; font-size: 0.88rem; box-sizing: border-box; resize: vertical;"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="button btn-secondary" onclick="closeDecisionModal()">Cancel</button>
+                    <button type="submit" class="button" id="btnConfirmDecision">Confirm Decision</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- View Feedback Modal Dialog -->
+    <div id="viewFeedbackModal" class="modal-overlay">
+        <div class="modal" style="max-width: 540px;">
+            <div class="modal-header">
+                <h3 id="viewFeedbackModalTitle">Interview Evaluation Feedback</h3>
+                <button type="button" class="modal-close" onclick="closeViewFeedbackModal()">&times;</button>
+            </div>
+            <div id="viewFeedbackModalBody" style="padding: 20px; max-height: 480px; overflow-y: auto;">
+                <p style="color:var(--secondary-text); text-align:center;">Loading feedback...</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="button btn-secondary" onclick="closeViewFeedbackModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Interview Details Modal Dialog -->
+    <div id="viewInterviewDetailsModal" class="modal-overlay">
+        <div class="modal" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3 id="viewInterviewDetailsTitle">Interview Session Details</h3>
+                <button type="button" class="modal-close" onclick="closeInterviewDetailsModal()">&times;</button>
+            </div>
+            <div id="viewInterviewDetailsBody" style="padding: 20px; font-size: 0.9rem;">
+                <p style="color:var(--secondary-text); text-align:center;">Loading details...</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="button btn-secondary" onclick="closeInterviewDetailsModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Assign Recruiter Modal Dialog (Admin Only) -->
+    <div id="assignRecruiterModal" class="modal-overlay">
+        <div class="modal" style="max-width: 480px;">
+            <div class="modal-header">
+                <h3 id="assignRecruiterModalTitle">Assign Recruiter</h3>
+                <button type="button" class="modal-close" onclick="closeAssignRecruiterModal()">&times;</button>
+            </div>
+            <form id="assignRecruiterForm">
+                <input type="hidden" id="assignCandId" />
+                <div style="padding: 16px 20px 0;">
+                    <p style="font-size: 0.92rem; color: var(--dark-navy); margin-bottom: 14px;" id="assignCandidatePrompt">
+                        Assign candidate to a dedicated recruiter for managing their recruitment pipeline:
+                    </p>
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label for="assignRecruiterSelect">Select Recruiter <span class="required-star">*</span></label>
+                        <select id="assignRecruiterSelect" required style="width: 100%; border-radius: 8px; border: 1px solid var(--border-color); padding: 10px; font-family: inherit; font-size: 0.88rem;">
+                            <option value="">-- Select Recruiter --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="button btn-secondary" onclick="closeAssignRecruiterModal()">Cancel</button>
+                    <button type="button" class="button btn-secondary" style="color:var(--status-red); border-color:#FECACA;" onclick="unassignRecruiterAction()">Clear Assignment</button>
+                    <button type="submit" class="button" id="btnConfirmAssign">Save Assignment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Application Scripts -->
+    <script src="js/api.js?v=3.2"></script>
+    <script src="js/dashboard.js?v=3.2"></script>
+</body>
+
+</html>

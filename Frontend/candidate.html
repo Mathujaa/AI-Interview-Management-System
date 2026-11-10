@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Candidate Portal — AI Interview System</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css?v=3.1" />
+</head>
+
+<body>
+    <div class="app-wrapper">
+        <!-- =============================================================
+             1. TOP NAVIGATION BAR (CANDIDATE VIEW)
+             ============================================================= -->
+        <header class="top-navbar">
+            <div class="nav-brand-group">
+                <div class="four-square-logo" title="AI Interview System">
+                    <span class="sq-1"></span>
+                    <span class="sq-2"></span>
+                    <span class="sq-3"></span>
+                    <span class="sq-4"></span>
+                </div>
+                <div class="brand-text">
+                    AI Interview <span>System</span>
+                </div>
+            </div>
+
+            <!-- Candidate Center Nav (3 Distinct Views) -->
+            <nav class="nav-center-menu" id="candidateNavMenu">
+                <a href="#application" class="nav-link-item active" id="cNavApplication" data-view="application">
+                    My Application
+                </a>
+                <a href="#interviews" class="nav-link-item" id="cNavInterviews" data-view="interviews">
+                    Interviews
+                </a>
+                <a href="#evaluation" class="nav-link-item" id="cNavEvaluation" data-view="evaluation">
+                    Evaluation &amp; Feedback
+                </a>
+            </nav>
+
+            <!-- Right: Notifications, Profile Pill & Sign Out -->
+            <div class="nav-right-group">
+                <div class="notifications-wrapper" style="position:relative;">
+                    <button type="button" class="nav-icon-btn" id="cNotificationsBellBtn" title="My Notifications" aria-label="Notifications">
+                        <span>🔔</span>
+                        <span class="nav-icon-badge" id="cNotificationsBadge" style="display:none;">0</span>
+                    </button>
+                    <!-- Notifications Dropdown -->
+                    <div class="notifications-dropdown" id="cNotificationsDropdown" style="display:none;">
+                        <div class="notifications-header">
+                            <h4>Notifications</h4>
+                            <button type="button" id="cMarkAllReadBtn" class="btn-link-sm">Mark all read</button>
+                        </div>
+                        <div class="notifications-list" id="cNotificationsList">
+                            <div class="empty-notif">No new notifications</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-profile-pill">
+                    <div class="avatar-circle" id="cAvatarCircle">CA</div>
+                    <div class="nav-user-info">
+                        <span class="nav-username" id="cHeaderUsername">Candidate</span>
+                        <span class="nav-role-badge" id="cHeaderRole">CANDIDATE</span>
+                    </div>
+                </div>
+
+                <button type="button" id="cNavLogout" class="nav-logout-btn" title="Sign Out">
+                    <span>🚪</span> Sign Out
+                </button>
+            </div>
+        </header>
+
+        <!-- =============================================================
+             2. CANDIDATE PORTAL MAIN CONTENT
+             ============================================================= -->
+        <main class="main-canvas">
+            <!-- Global Toast Alert -->
+            <div id="cStatusAlert" class="alert"></div>
+
+            <!-- =========================================================
+                 VIEW 1: MY APPLICATION (PROGRESSION & STATUS)
+                 ========================================================= -->
+            <section id="view-application" class="candidate-view-section active">
+                <!-- Welcome & Application Status Banner -->
+                <div class="candidate-welcome-card">
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px;">
+                        <div>
+                            <h2>Welcome, <span id="candWelcomeName">Candidate</span></h2>
+                            <p>Track your interview progress, scheduled rounds, and evaluation feedback in real-time.</p>
+                            <div class="candidate-status-chip">
+                                <span>Application Status:</span>
+                                <strong id="candBannerStatus" style="text-transform:uppercase; letter-spacing:0.04em;">APPLIED</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5-STAGE RECRUITMENT PROGRESS STEPPER -->
+                <div class="white-card" style="margin-bottom: 24px; padding: 24px 28px;">
+                    <div class="card-header-clean" style="margin-bottom: 12px;">
+                        <div>
+                            <h3 style="margin-bottom:2px;">Recruitment Stage Progression</h3>
+                            <p style="color:var(--secondary-text); font-size:0.84rem; margin:0;">Transparent milestone tracking from application submission to final decision</p>
+                        </div>
+                        <span class="badge badge-applied" id="stepperStatusSummary">Applied</span>
+                    </div>
+
+                    <div class="stepper-container">
+                        <div class="stepper-progress-bar">
+                            <div class="stepper-progress-fill" id="stepperFill" style="width: 0%;"></div>
+                        </div>
+
+                        <!-- Step 1: Applied -->
+                        <div class="step-node completed" id="stepNode1">
+                            <div class="step-circle" id="step1Circle">1</div>
+                            <div class="step-label">Applied</div>
+                            <div class="step-date" id="step1Date">Submitted</div>
+                        </div>
+
+                        <!-- Step 2: Shortlisted -->
+                        <div class="step-node" id="stepNode2">
+                            <div class="step-circle" id="step2Circle">2</div>
+                            <div class="step-label">Shortlisted</div>
+                            <div class="step-date" id="step2Date">—</div>
+                        </div>
+
+                        <!-- Step 3: Interview Scheduled -->
+                        <div class="step-node" id="stepNode3">
+                            <div class="step-circle" id="step3Circle">3</div>
+                            <div class="step-label">Scheduled</div>
+                            <div class="step-date" id="step3Date">—</div>
+                        </div>
+
+                        <!-- Step 4: Interviewed -->
+                        <div class="step-node" id="stepNode4">
+                            <div class="step-circle" id="step4Circle">4</div>
+                            <div class="step-label">Interviewed</div>
+                            <div class="step-date" id="step4Date">—</div>
+                        </div>
+
+                        <!-- Step 5: Final Decision -->
+                        <div class="step-node" id="stepNode5">
+                            <div class="step-circle" id="step5Circle">5</div>
+                            <div class="step-label" id="step5Label">Decision</div>
+                            <div class="step-date" id="step5Date">—</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TWO-COLUMN APPLICATION OVERVIEW & STATUS HISTORY -->
+                <div class="dashboard-2col" style="margin-bottom: 24px;">
+                    <!-- Column 1: Application Profile Details -->
+                    <div class="white-card">
+                        <div class="card-header-clean">
+                            <h3>Application Details</h3>
+                            <span class="badge badge-shortlisted">Candidate Profile</span>
+                        </div>
+
+                        <div class="candidate-profile-grid" style="margin-top: 14px;">
+                            <div class="profile-grid-item">
+                                <div class="label">Full Name</div>
+                                <div class="value" id="candDetailName">—</div>
+                            </div>
+                            <div class="profile-grid-item">
+                                <div class="label">Email Address</div>
+                                <div class="value" id="candDetailEmail">—</div>
+                            </div>
+                            <div class="profile-grid-item">
+                                <div class="label">Contact Phone</div>
+                                <div class="value" id="candDetailPhone">Not provided</div>
+                            </div>
+                            <div class="profile-grid-item">
+                                <div class="label">Target Position</div>
+                                <div class="value" id="candDetailRole">Software Engineer</div>
+                            </div>
+                            <div class="profile-grid-item">
+                                <div class="label">Experience Level</div>
+                                <div class="value" id="candDetailExp">Experienced</div>
+                            </div>
+                            <div class="profile-grid-item">
+                                <div class="label">Submitted Date</div>
+                                <div class="value" id="candDetailDate">—</div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 16px; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px 14px;">
+                            <div style="font-size:0.72rem; font-weight:600; color:var(--muted-text); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:6px;">Skills &amp; Expertise</div>
+                            <div id="candDetailSkills" style="font-size:0.88rem; color:var(--dark-navy); font-weight:500;">
+                                Software Engineering, Problem Solving
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Status History Timeline -->
+                    <div class="white-card">
+                        <div class="card-header-clean">
+                            <div>
+                                <h3 style="margin-bottom:2px;">Status History &amp; Remarks</h3>
+                                <p style="color:var(--secondary-text); font-size:0.82rem; margin:0;">Transparent chronological timeline of your application updates</p>
+                            </div>
+                            <span class="badge badge-applied">Audit Trail</span>
+                        </div>
+
+                        <div id="cStatusHistoryTimeline" style="margin-top:12px; max-height:420px; overflow-y:auto; padding-right:6px;">
+                            <p style="color:var(--secondary-text); padding:24px; text-align:center;">Loading progression history...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =========================================================
+                 VIEW 2: INTERVIEWS (UPCOMING & COMPLETED)
+                 ========================================================= -->
+            <section id="view-interviews" class="candidate-view-section">
+                <!-- Interviews View Header Banner -->
+                <div class="white-card" style="margin-bottom: 24px; padding: 22px 28px;">
+                    <div class="card-header-clean" style="margin-bottom: 0; border-bottom: none; padding-bottom: 0;">
+                        <div>
+                            <h2 style="font-size:1.35rem; font-weight:800; color:var(--dark-navy); margin-bottom:4px;">My Interview Sessions</h2>
+                            <p style="color:var(--secondary-text); font-size:0.9rem; margin:0;">
+                                Monitor all scheduled upcoming interview rounds and review past interview records.
+                            </p>
+                        </div>
+                        <span class="badge badge-scheduled" id="totalInterviewsBadge">0 Sessions</span>
+                    </div>
+                </div>
+
+                <!-- Section 1: Upcoming Interviews -->
+                <div class="white-card" style="margin-bottom: 24px;">
+                    <div class="card-header-clean">
+                        <div>
+                            <h3 style="margin-bottom:2px;">Upcoming Interviews</h3>
+                            <p style="color:var(--secondary-text); font-size:0.82rem; margin:0;">Confirmed upcoming interview sessions requiring your preparation</p>
+                        </div>
+                        <span class="badge badge-scheduled" id="upcomingCountBadge">0 Upcoming</span>
+                    </div>
+
+                    <div id="cUpcomingInterviewsList" style="display:flex; flex-direction:column; gap:14px; margin-top:14px;">
+                        <p style="color:var(--secondary-text); padding:24px; text-align:center;">Loading upcoming interviews...</p>
+                    </div>
+                </div>
+
+                <!-- Section 2: Completed Interviews -->
+                <div class="white-card">
+                    <div class="card-header-clean">
+                        <div>
+                            <h3 style="margin-bottom:2px;">Past &amp; Completed Interviews</h3>
+                            <p style="color:var(--secondary-text); font-size:0.82rem; margin:0;">Historical interview rounds conducted with recruiter feedback status</p>
+                        </div>
+                        <span class="badge badge-hired" id="completedCountBadge">0 Completed</span>
+                    </div>
+
+                    <div id="cCompletedInterviewsList" style="display:flex; flex-direction:column; gap:14px; margin-top:14px;">
+                        <p style="color:var(--secondary-text); padding:24px; text-align:center;">Loading past interviews...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =========================================================
+                 VIEW 3: EVALUATION & FEEDBACK
+                 ========================================================= -->
+            <section id="view-evaluation" class="candidate-view-section">
+                <!-- Evaluation View Header Banner -->
+                <div class="white-card" style="margin-bottom: 24px; padding: 22px 28px;">
+                    <div class="card-header-clean" style="margin-bottom: 0; border-bottom: none; padding-bottom: 0;">
+                        <div>
+                            <h2 style="font-size:1.35rem; font-weight:800; color:var(--dark-navy); margin-bottom:4px;">Evaluation Feedback &amp; AI Insights</h2>
+                            <p style="color:var(--secondary-text); font-size:0.9rem; margin:0;">
+                                Verified performance scores across core competency metrics and synthesized evaluation feedback.
+                            </p>
+                        </div>
+                        <span class="badge badge-applied" id="overallRecommendationBadge">Pending Evaluation</span>
+                    </div>
+                </div>
+
+                <!-- Evaluation Content Area -->
+                <div class="white-card" id="evaluationContainer">
+                    <div id="cEvaluationContent" style="padding: 10px 0;">
+                        <p style="color:var(--secondary-text); padding:28px; text-align:center;">Loading evaluation details...</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Cache-busting scripts to prevent browser caching of old versions -->
+    <script src="js/api.js?v=3.2"></script>
+    <script src="js/candidate.js?v=3.2"></script>
+</body>
+
+</html>

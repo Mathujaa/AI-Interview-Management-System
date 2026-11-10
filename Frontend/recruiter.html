@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recruiter Portal — AI Interview Management System</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css?v=3.2" />
+</head>
+
+<body>
+    <div class="app-wrapper">
+        <!-- =============================================================
+             1. HORIZONTAL TOP NAVIGATION BAR (RECRUITER VIEW)
+             ============================================================= -->
+        <header class="top-navbar">
+            <div class="nav-brand-group" onclick="navigateTo('overview')">
+                <div class="four-square-logo" title="AI Interview System">
+                    <span class="sq-1"></span>
+                    <span class="sq-2"></span>
+                    <span class="sq-3"></span>
+                    <span class="sq-4"></span>
+                </div>
+                <div class="brand-text">
+                    AI Interview <span>System</span>
+                </div>
+                <span class="badge badge-shortlisted" style="font-size:0.7rem; font-weight:700; margin-left:6px; letter-spacing:0.5px;">RECRUITER PORTAL</span>
+            </div>
+
+            <!-- Recruiter Center Navigation (4 Horizontal Tabs) -->
+            <nav class="nav-center-menu" id="navCenterMenu">
+                <a href="#overview" class="nav-link-item active" id="nav-overview" onclick="navigateTo('overview')">
+                    Overview
+                </a>
+                <a href="#candidates" class="nav-link-item" id="nav-candidates" onclick="navigateTo('candidates')">
+                    My Candidates
+                </a>
+                <a href="#interviews" class="nav-link-item" id="nav-interviews" onclick="navigateTo('interviews')">
+                    My Interviews
+                </a>
+                <a href="#feedback" class="nav-link-item" id="nav-feedback" onclick="navigateTo('feedback')">
+                    Submit Feedback
+                </a>
+            </nav>
+
+            <!-- Right Controls: Notifications, Profile Pill & Sign Out -->
+            <div class="nav-right-group">
+                <!-- Recruiter Notifications Bell & Dropdown -->
+                <div class="notifications-wrapper" style="position:relative;">
+                    <button type="button" class="nav-icon-btn" id="rNotificationsBellBtn" title="Recruiter Notifications" aria-label="Notifications">
+                        <span>🔔</span>
+                        <span class="nav-icon-badge" id="rNotificationsBadge" style="display:none;">0</span>
+                    </button>
+                    <!-- Notifications Dropdown -->
+                    <div class="notifications-dropdown" id="rNotificationsDropdown" style="display:none;">
+                        <div class="notifications-header">
+                            <h4>Notifications</h4>
+                            <button type="button" id="rMarkAllReadBtn" class="btn-link-sm" onclick="markAllRecruiterNotificationsRead()">Mark all read</button>
+                        </div>
+                        <div class="notifications-list" id="rNotificationsList">
+                            <div class="empty-notif">No new notifications</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-profile-pill" id="navProfilePill" title="Authenticated Recruiter">
+                    <div class="avatar-circle" id="headerAvatarCircle">RC</div>
+                    <div class="nav-user-info">
+                        <span class="nav-username" id="headerUsername">Recruiter</span>
+                        <span class="nav-role-badge" id="headerUserRole">RECRUITER</span>
+                    </div>
+                </div>
+
+                <button type="button" id="nav-logout" class="nav-logout-btn" title="Sign Out of Portal">
+                    <span>🚪</span> Sign Out
+                </button>
+
+                <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" title="Toggle Navigation Menu">
+                    ☰
+                </button>
+            </div>
+        </header>
+
+        <!-- =============================================================
+             2. MAIN CONTENT CANVAS
+             ============================================================= -->
+        <main class="main-canvas">
+            <!-- Page Header Row -->
+            <div class="page-header-row">
+                <div class="page-title-group">
+                    <h1 id="pageTitle">Recruiter Operations Hub</h1>
+                    <div class="page-welcome-sub" id="headerSubtitle">
+                        Welcome, <strong id="welcomeUserGreeting">Recruiter</strong> 👋 &bull; Dedicated candidate portfolio &amp; evaluation workflow
+                    </div>
+                </div>
+
+                <div class="page-header-actions">
+                    <button type="button" class="button btn-secondary btn-sm" onclick="refreshCurrentSection()">
+                        <span>↻</span> Refresh Data
+                    </button>
+                </div>
+            </div>
+
+            <!-- Global Toast / Alert Banner -->
+            <div id="statusAlert" class="alert"></div>
+
+            <!-- =============================================================
+                 SECTION 1: OVERVIEW (Recruiter Portfolio KPIs & Activity)
+                 ============================================================= -->
+            <section id="section-overview" class="content-section active" style="scroll-margin-top: 84px;">
+                <!-- RECRUITER KPI GRID: 6 Metric Cards -->
+                <div class="kpi-row-4" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom:24px;">
+                    <!-- KPI 1: My Candidates -->
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <span class="kpi-title">Assigned Candidates</span>
+                            <div class="kpi-icon-chip kpi-icon-blue">👥</div>
+                        </div>
+                        <div class="kpi-value" id="stat-rec-candidates">0</div>
+                        <div class="kpi-footer">
+                            <span class="kpi-trend-pill positive">Active</span>
+                            <span>In your portfolio</span>
+                        </div>
+                    </div>
+
+                    <!-- KPI 2: Upcoming Interviews -->
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <span class="kpi-title">Upcoming Interviews</span>
+                            <div class="kpi-icon-chip kpi-icon-amber">📅</div>
+                        </div>
+                        <div class="kpi-value" id="stat-rec-upcoming">0</div>
+                        <div class="kpi-footer">
+                            <span class="kpi-trend-pill neutral">Scheduled</span>
+                            <span>Pending rounds</span>
+                        </div>
+                    </div>
+
+                    <!-- KPI 3: Completed Interviews -->
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <span class="kpi-title">Completed Rounds</span>
+                            <div class="kpi-icon-chip kpi-icon-purple">✓</div>
+                        </div>
+                        <div class="kpi-value" id="stat-rec-completed">0</div>
+                        <div class="kpi-footer">
+                            <span class="kpi-trend-pill positive">Evaluated</span>
+                            <span>Sessions finished</span>
+                        </div>
+                    </div>
+
+                    <!-- KPI 4: Pending Feedback -->
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <span class="kpi-title">Pending Feedback</span>
+                            <div class="kpi-icon-chip kpi-icon-red">📝</div>
+                        </div>
+                        <div class="kpi-value" id="stat-rec-pending-feedback">0</div>
+                        <div class="kpi-footer">
+                            <span class="kpi-trend-pill neutral">Action needed</span>
+                            <span>Unsubmitted scorecards</span>
+                        </div>
+                    </div>
+
+                    <!-- KPI 5: Shortlisted Candidates -->
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <span class="kpi-title">Shortlisted</span>
+                            <div class="kpi-icon-chip kpi-icon-blue">⭐</div>
+                        </div>
+                        <div class="kpi-value" id="stat-rec-shortlisted">0</div>
+                        <div class="kpi-footer">
+                            <span class="kpi-trend-pill positive">Screened</span>
+                            <span>Ready for rounds</span>
+                        </div>
+                    </div>
+
+                    <!-- KPI 6: Selected / Hired -->
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <span class="kpi-title">Selected / Rejected</span>
+                            <div class="kpi-icon-chip kpi-icon-green">🎯</div>
+                        </div>
+                        <div class="kpi-value" id="stat-rec-outcomes">0 / 0</div>
+                        <div class="kpi-footer">
+                            <span class="kpi-trend-pill positive">Outcomes</span>
+                            <span>Decisions reached</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recruiter Quick Summary Cards -->
+                <div class="dashboard-2col">
+                    <!-- Column 1: Upcoming Interview Sessions -->
+                    <div class="white-card">
+                        <div class="card-header-clean">
+                            <h3>Upcoming Interview Sessions</h3>
+                            <button type="button" class="button btn-secondary btn-sm" onclick="navigateTo('interviews')">View All</button>
+                        </div>
+                        <div id="overviewUpcomingList" style="padding:16px 0;">
+                            <p style="color:var(--secondary-text); text-align:center;">Loading upcoming sessions...</p>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Candidate Progression Status -->
+                    <div class="white-card">
+                        <div class="card-header-clean">
+                            <h3>Portfolio Progression Breakdown</h3>
+                            <button type="button" class="button btn-secondary btn-sm" onclick="navigateTo('candidates')">View Candidates</button>
+                        </div>
+                        <div id="overviewCandidateBreakdown" style="padding:16px 0;">
+                            <p style="color:var(--secondary-text); text-align:center;">Loading breakdown...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =============================================================
+                 SECTION 2: MY CANDIDATES
+                 ============================================================= -->
+            <section id="section-candidates" class="content-section" style="scroll-margin-top: 84px;">
+                <div class="card">
+                    <div class="table-toolbar">
+                        <div>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <h3>My Assigned Candidates</h3>
+                                <span class="badge badge-shortlisted" id="assignedCandidateCountBadge">0 Candidates</span>
+                            </div>
+                            <p class="card-subtitle" style="margin-top:4px; margin-bottom:0;">
+                                Candidates assigned to your portfolio. Manage application status, schedule interviews, and track interview progress.
+                            </p>
+                        </div>
+                        <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                            <div class="search-input-group">
+                                <span class="search-icon-chip">🔍</span>
+                                <input type="text" id="recCandSearchInput" placeholder="Search assigned candidates..." />
+                            </div>
+                            <select id="recCandStatusFilter">
+                                <option value="">All Statuses</option>
+                                <option value="applied">Applied</option>
+                                <option value="shortlisted">Shortlisted</option>
+                                <option value="scheduled">Scheduled</option>
+                                <option value="interviewed">Interviewed</option>
+                                <option value="selected">Selected</option>
+                                <option value="rejected">Rejected</option>
+                            </select>
+                            <button type="button" class="button btn-secondary btn-sm" onclick="loadRecruiterCandidates()">
+                                <span>↻</span> Refresh
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Candidate ID</th>
+                                    <th>Candidate Name</th>
+                                    <th>Email Address</th>
+                                    <th>Phone</th>
+                                    <th>Status</th>
+                                    <th style="text-align:right;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recCandidatesTableBody">
+                                <tr>
+                                    <td colspan="6" style="text-align:center; color:#718096; padding:24px;">
+                                        Loading your assigned candidates...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =============================================================
+                 SECTION 3: MY INTERVIEWS
+                 ============================================================= -->
+            <section id="section-interviews" class="content-section" style="scroll-margin-top: 84px;">
+                <!-- Schedule Session Form -->
+                <div class="card" style="margin-bottom:24px;">
+                    <div class="card-header-bar">
+                        <div>
+                            <h3>Schedule Interview Session</h3>
+                            <p class="card-subtitle" style="margin-bottom:0;">
+                                Book an interview round for candidates assigned to you. You will be automatically recorded as the evaluator.
+                            </p>
+                        </div>
+                    </div>
+                    <form id="recScheduleInterviewForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="recInterviewCandidateSelect">Assigned Candidate <span class="required-star">*</span></label>
+                                <select id="recInterviewCandidateSelect" required>
+                                    <option value="">-- Select Assigned Candidate --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="recInterviewDateTime">Interview Date &amp; Time <span class="required-star">*</span></label>
+                                <input type="datetime-local" id="recInterviewDateTime" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="recInterviewRound">Round Number <span class="required-star">*</span></label>
+                                <input type="number" id="recInterviewRound" min="1" max="10" value="1" required />
+                            </div>
+                        </div>
+                        <div>
+                            <button type="submit" class="button" id="btnRecSchedule">
+                                <span>📅</span> Schedule Interview Round
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Interviews Directory Table -->
+                <div class="card">
+                    <div class="table-toolbar">
+                        <div>
+                            <h3>My Assigned Interviews</h3>
+                            <p class="card-subtitle" style="margin-bottom:0;">
+                                Upcoming and completed interview sessions where you are the assigned evaluator
+                            </p>
+                        </div>
+                        <div style="display:flex; gap:10px; align-items:center;">
+                            <select id="recInterviewStatusFilter">
+                                <option value="">All Sessions</option>
+                                <option value="scheduled">Scheduled</option>
+                                <option value="completed">Completed</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                            <button type="button" class="button btn-secondary btn-sm" onclick="loadRecruiterInterviews()">
+                                <span>↻</span> Refresh
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Session ID</th>
+                                    <th>Candidate Name</th>
+                                    <th>Round</th>
+                                    <th>Date &amp; Time</th>
+                                    <th>Status</th>
+                                    <th>Feedback</th>
+                                    <th style="text-align:right;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recInterviewsTableBody">
+                                <tr>
+                                    <td colspan="7" style="text-align:center; color:#718096; padding:24px;">
+                                        Loading your assigned interviews...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =============================================================
+                 SECTION 4: SUBMIT FEEDBACK
+                 ============================================================= -->
+            <section id="section-feedback" class="content-section" style="scroll-margin-top: 84px;">
+                <div class="card" style="margin-bottom:24px;">
+                    <div class="card-header-bar">
+                        <div>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <h3>Submit Interview Feedback &amp; Evaluation</h3>
+                                <span class="badge badge-shortlisted">GenAI Report Trigger</span>
+                            </div>
+                            <p class="card-subtitle" style="margin-top:4px; margin-bottom:0;">
+                                Record technical, communication, and problem-solving scores. Submitting feedback completes the session and synthesizes the candidate's evaluation report.
+                            </p>
+                        </div>
+                    </div>
+
+                    <form id="recFeedbackForm">
+                        <div class="form-row">
+                            <div class="form-group" style="flex:2;">
+                                <label for="recFeedbackInterviewSelect">Target Interview Session <span class="required-star">*</span></label>
+                                <select id="recFeedbackInterviewSelect" required>
+                                    <option value="">-- Select Interview Session to Evaluate --</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 3 Numerical Competencies (0 - 10 scale) -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="recTechScore">Technical Competence (0 - 10) <span class="required-star">*</span></label>
+                                <input type="number" id="recTechScore" min="0" max="10" placeholder="e.g. 8" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="recCommScore">Communication &amp; Clarity (0 - 10) <span class="required-star">*</span></label>
+                                <input type="number" id="recCommScore" min="0" max="10" placeholder="e.g. 8" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="recProbScore">Problem Solving &amp; Logic (0 - 10) <span class="required-star">*</span></label>
+                                <input type="number" id="recProbScore" min="0" max="10" placeholder="e.g. 8" required />
+                            </div>
+                        </div>
+
+                        <!-- Qualitative Feedback -->
+                        <div class="form-row">
+                            <div class="form-group" style="flex:1;">
+                                <label for="recStrengths">Key Strengths Demonstrated</label>
+                                <textarea id="recStrengths" rows="3" placeholder="Core competencies, depth of technical reasoning, strong domain knowledge..."></textarea>
+                            </div>
+                            <div class="form-group" style="flex:1;">
+                                <label for="recWeaknesses">Areas for Growth / Weaknesses</label>
+                                <textarea id="recWeaknesses" rows="3" placeholder="Architecture scalability, edge case handling, response brevity..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom:20px;">
+                            <label for="recComments">Overall Interview Comments &amp; Justification</label>
+                            <textarea id="recComments" rows="3" placeholder="Executive remarks, candidate cultural fit, team recommendation..."></textarea>
+                        </div>
+
+                        <div>
+                            <button type="submit" class="button" id="btnRecSubmitFeedback">
+                                <span>📝</span> Submit Scorecard &amp; Synthesize Report
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Recent Feedback History Table -->
+                <div class="card">
+                    <div class="table-toolbar">
+                        <div>
+                            <h3>My Submitted Evaluations</h3>
+                            <p class="card-subtitle" style="margin-bottom:0;">Historical scorecards submitted for your portfolio</p>
+                        </div>
+                        <button type="button" class="button btn-secondary btn-sm" onclick="loadRecruiterFeedbackHistory()">
+                            <span>↻</span> Refresh History
+                        </button>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Session ID</th>
+                                    <th>Candidate</th>
+                                    <th>Technical</th>
+                                    <th>Communication</th>
+                                    <th>Problem Solving</th>
+                                    <th>Date Submitted</th>
+                                    <th style="text-align:right;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recFeedbackHistoryTableBody">
+                                <tr>
+                                    <td colspan="7" style="text-align:center; color:#718096; padding:24px;">
+                                        Loading feedback history...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- =============================================================
+         MODALS (Lifecycle Decisions, Status History, Feedback, AI Report, ML Predict)
+         ============================================================= -->
+
+    <!-- Status History Modal -->
+    <div id="statusHistoryModal" class="modal-overlay">
+        <div class="modal" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3 id="statusHistoryModalTitle">Candidate Recruitment Lifecycle History</h3>
+                <button type="button" class="modal-close" onclick="closeStatusHistoryModal()">&times;</button>
+            </div>
+            <div id="statusHistoryModalBody" style="padding: 20px; max-height: 480px; overflow-y: auto;">
+                <p style="color:var(--secondary-text); text-align:center;">Loading history...</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="button btn-secondary" onclick="closeStatusHistoryModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lifecycle Decision Modal (Select / Reject / Shortlist) -->
+    <div id="recDecisionModal" class="modal-overlay">
+        <div class="modal" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3 id="recDecisionModalTitle">Recruitment Decision</h3>
+                <button type="button" class="modal-close" onclick="closeRecDecisionModal()">&times;</button>
+            </div>
+            <form id="recDecisionForm">
+                <input type="hidden" id="recDecisionCandId" />
+                <input type="hidden" id="recDecisionAction" />
+                <div style="padding: 16px 20px 0;">
+                    <p style="font-size: 0.95rem; color: var(--dark-navy); margin-bottom: 14px; font-weight: 600;" id="recDecisionPrompt">
+                        Confirm recruitment progression decision:
+                    </p>
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label for="recDecisionRemarks">Decision Remarks &amp; Justification <span class="required-star">*</span></label>
+                        <textarea id="recDecisionRemarks" rows="3" placeholder="Enter evaluation notes or remarks for candidate audit trail..." required style="width: 100%; border-radius: 8px; border: 1px solid var(--border-color); padding: 10px; font-family: inherit; font-size: 0.88rem; box-sizing: border-box; resize: vertical;"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="button btn-secondary" onclick="closeRecDecisionModal()">Cancel</button>
+                    <button type="submit" class="button" id="btnRecConfirmDecision">Confirm Decision</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- View Feedback Modal -->
+    <div id="recViewFeedbackModal" class="modal-overlay">
+        <div class="modal" style="max-width: 540px;">
+            <div class="modal-header">
+                <h3 id="recViewFeedbackTitle">Interview Evaluation Feedback</h3>
+                <button type="button" class="modal-close" onclick="closeRecViewFeedbackModal()">&times;</button>
+            </div>
+            <div id="recViewFeedbackBody" style="padding: 20px; max-height: 480px; overflow-y: auto;">
+                <p style="color:var(--secondary-text); text-align:center;">Loading feedback...</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="button btn-secondary" onclick="closeRecViewFeedbackModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Evaluation Report Modal for Assigned Candidates -->
+    <div id="recReportModal" class="modal-overlay">
+        <div class="modal" style="max-width: 750px;">
+            <div class="modal-header">
+                <div>
+                    <h3 id="recReportModalTitle" style="margin:0;">Generative AI Candidate Evaluation Report</h3>
+                    <p id="recReportModalSubtitle" style="font-size:0.85rem; color:var(--secondary-text); margin:4px 0 0;">AI Executive Synthesis &amp; Competency Scores</p>
+                </div>
+                <button type="button" class="modal-close" onclick="closeRecReportModal()">&times;</button>
+            </div>
+            <div id="recReportModalBody" style="padding: 20px; max-height: 520px; overflow-y: auto;">
+                <p style="color:var(--secondary-text); text-align:center;">Loading AI report...</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="button btn-secondary" onclick="closeRecReportModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ML Selection Prediction Modal for Assigned Candidates -->
+    <div id="recPredictionModal" class="modal-overlay">
+        <div class="modal" style="max-width: 600px;">
+            <div class="modal-header">
+                <div>
+                    <h3 id="recPredictionModalTitle" style="margin:0;">ML Candidate Selection Prediction</h3>
+                    <p id="recPredictionModalSubtitle" style="font-size:0.85rem; color:var(--secondary-text); margin:4px 0 0;">Random Forest Classifier (94% Accuracy)</p>
+                </div>
+                <button type="button" class="modal-close" onclick="closeRecPredictionModal()">&times;</button>
+            </div>
+            <div id="recPredictionModalBody" style="padding: 20px; max-height: 520px; overflow-y: auto;">
+                <p style="color:var(--secondary-text); text-align:center;">Loading prediction features...</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="button btn-secondary" onclick="closeRecPredictionModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mandatory First-Login Password Change Modal -->
+    <div id="firstLoginPasswordModal" class="modal-overlay">
+        <div class="modal" style="max-width: 480px;">
+            <div class="modal-header">
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:1.4rem;">🔐</span>
+                    <h3 style="margin:0;">Update Temporary Password</h3>
+                </div>
+            </div>
+            <form id="firstLoginForm">
+                <div style="padding: 16px 20px 0;">
+                    <p style="font-size: 0.88rem; color: var(--secondary-text); margin-bottom: 14px; line-height: 1.4;">
+                        Your recruiter account was provisioned by the Administrator with a temporary password. As an essential security requirement, please choose a permanent personal password to continue.
+                    </p>
+                    <div id="firstLoginAlert" class="alert" style="display:none; margin-bottom:12px; font-size:0.85rem; padding:8px 12px;"></div>
+                    <div class="form-group" style="margin-bottom: 12px;">
+                        <label for="firstLoginOldPass">Current Temporary Password <span class="required-star">*</span></label>
+                        <input type="password" id="firstLoginOldPass" required placeholder="Enter current temporary password" style="width: 100%; border-radius: 8px; border: 1px solid var(--border-color); padding: 10px;" />
+                    </div>
+                    <div class="form-group" style="margin-bottom: 12px;">
+                        <label for="firstLoginNewPass">New Personal Password (min 6 chars) <span class="required-star">*</span></label>
+                        <input type="password" id="firstLoginNewPass" required minlength="6" placeholder="Enter new password" style="width: 100%; border-radius: 8px; border: 1px solid var(--border-color); padding: 10px;" />
+                    </div>
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label for="firstLoginConfirmPass">Confirm New Password <span class="required-star">*</span></label>
+                        <input type="password" id="firstLoginConfirmPass" required minlength="6" placeholder="Re-enter new password" style="width: 100%; border-radius: 8px; border: 1px solid var(--border-color); padding: 10px;" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="button btn-primary" id="btnConfirmChangePass" style="width: 100%;">Save Password &amp; Enter Portal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Application Scripts -->
+    <script src="js/api.js?v=3.2"></script>
+    <script src="js/recruiter.js?v=3.2"></script>
+</body>
+
+</html>
+

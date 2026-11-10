@@ -1,0 +1,1001 @@
+skill_score,years_experience,technical_score,communication_rating,prev_performance,education,target
+7,0,10,2,7,bachelor,Moderately Likely to Select
+4,14,8,4,4,master,Moderately Likely to Select
+8,7,10,1,1,phd,Moderately Likely to Select
+5,10,9,4,9,bachelor,Moderately Likely to Select
+7,11,10,2,5,bachelor,Moderately Likely to Select
+10,11,8,5,2,bachelor,Moderately Likely to Select
+3,3,8,3,8,bachelor,Moderately Likely to Select
+7,15,1,8,2,highschool,Low Selection Probability
+8,3,10,4,3,phd,Moderately Likely to Select
+5,4,5,1,10,bachelor,Moderately Likely to Select
+4,4,4,1,1,bachelor,Low Selection Probability
+8,7,2,10,2,highschool,Moderately Likely to Select
+8,9,8,3,7,master,Moderately Likely to Select
+3,16,3,9,10,master,Moderately Likely to Select
+6,8,4,7,2,phd,Low Selection Probability
+5,18,7,2,6,master,Moderately Likely to Select
+2,13,10,9,3,bachelor,Moderately Likely to Select
+8,7,9,10,4,bachelor,Moderately Likely to Select
+6,8,2,2,8,master,Low Selection Probability
+2,10,3,3,3,bachelor,Low Selection Probability
+5,0,4,10,10,bachelor,Moderately Likely to Select
+1,13,10,2,6,highschool,Low Selection Probability
+10,4,1,3,1,highschool,Low Selection Probability
+6,20,7,6,7,bachelor,Moderately Likely to Select
+9,13,2,9,8,bachelor,Moderately Likely to Select
+1,3,5,9,8,master,Moderately Likely to Select
+10,0,1,7,3,bachelor,Moderately Likely to Select
+3,18,3,3,10,bachelor,Low Selection Probability
+7,7,2,4,1,bachelor,Low Selection Probability
+4,14,1,6,9,highschool,Moderately Likely to Select
+9,20,7,5,6,bachelor,Moderately Likely to Select
+3,14,5,2,9,bachelor,Low Selection Probability
+5,8,1,6,7,bachelor,Low Selection Probability
+3,20,6,3,1,bachelor,Low Selection Probability
+7,8,5,8,1,bachelor,Moderately Likely to Select
+5,9,3,2,6,highschool,Low Selection Probability
+9,19,7,1,5,highschool,Moderately Likely to Select
+7,20,10,9,9,bachelor,Highly Likely to Select
+2,8,9,3,2,highschool,Low Selection Probability
+4,2,9,1,8,master,Moderately Likely to Select
+9,19,9,7,5,bachelor,Moderately Likely to Select
+2,10,2,10,2,bachelor,Low Selection Probability
+10,5,3,5,10,bachelor,Moderately Likely to Select
+9,1,7,5,6,master,Moderately Likely to Select
+10,6,5,1,10,master,Moderately Likely to Select
+5,17,2,9,8,master,Moderately Likely to Select
+2,1,3,7,4,master,Low Selection Probability
+4,16,10,8,2,bachelor,Moderately Likely to Select
+7,10,6,9,5,master,Moderately Likely to Select
+8,11,7,6,2,bachelor,Moderately Likely to Select
+3,18,9,5,2,bachelor,Low Selection Probability
+1,6,1,6,6,bachelor,Low Selection Probability
+4,19,7,2,10,bachelor,Moderately Likely to Select
+2,5,8,4,9,phd,Moderately Likely to Select
+8,20,3,3,4,bachelor,Low Selection Probability
+4,0,4,7,6,master,Moderately Likely to Select
+2,16,10,9,7,bachelor,Moderately Likely to Select
+6,10,6,5,6,bachelor,Moderately Likely to Select
+6,17,10,6,8,bachelor,Moderately Likely to Select
+10,20,7,10,4,bachelor,Moderately Likely to Select
+4,16,4,2,1,master,Low Selection Probability
+6,6,8,3,7,bachelor,Moderately Likely to Select
+2,16,5,3,3,bachelor,Low Selection Probability
+10,19,1,9,6,master,Moderately Likely to Select
+2,8,4,7,2,bachelor,Low Selection Probability
+10,16,3,8,9,phd,Moderately Likely to Select
+4,19,9,10,1,bachelor,Moderately Likely to Select
+8,7,8,9,6,bachelor,Moderately Likely to Select
+7,16,1,6,6,bachelor,Moderately Likely to Select
+9,6,6,4,5,bachelor,Moderately Likely to Select
+8,0,9,1,5,bachelor,Moderately Likely to Select
+5,12,7,8,1,master,Moderately Likely to Select
+2,18,4,7,10,master,Moderately Likely to Select
+5,18,1,2,5,master,Low Selection Probability
+8,16,2,8,2,bachelor,Moderately Likely to Select
+10,12,5,5,7,bachelor,Moderately Likely to Select
+9,15,5,7,3,bachelor,Moderately Likely to Select
+9,7,8,4,4,highschool,Moderately Likely to Select
+1,18,6,5,3,master,Low Selection Probability
+9,17,8,8,3,bachelor,Moderately Likely to Select
+7,0,2,1,4,highschool,Low Selection Probability
+9,13,3,1,5,highschool,Low Selection Probability
+8,18,6,4,1,phd,Low Selection Probability
+1,14,10,3,4,highschool,Low Selection Probability
+8,17,3,10,8,bachelor,Moderately Likely to Select
+8,1,6,2,10,bachelor,Moderately Likely to Select
+3,16,6,3,7,bachelor,Low Selection Probability
+1,17,2,1,9,bachelor,Low Selection Probability
+8,5,7,1,5,bachelor,Moderately Likely to Select
+3,18,2,6,10,master,Moderately Likely to Select
+3,3,6,5,4,bachelor,Low Selection Probability
+1,0,1,8,8,master,Low Selection Probability
+5,7,3,2,9,phd,Low Selection Probability
+10,6,2,4,7,master,Moderately Likely to Select
+7,2,7,8,7,bachelor,Moderately Likely to Select
+10,9,4,6,5,bachelor,Moderately Likely to Select
+9,9,8,1,4,master,Moderately Likely to Select
+7,18,6,4,10,master,Moderately Likely to Select
+9,13,10,1,1,bachelor,Moderately Likely to Select
+8,1,4,2,10,master,Moderately Likely to Select
+2,0,5,5,10,highschool,Moderately Likely to Select
+1,17,9,8,7,bachelor,Moderately Likely to Select
+7,6,7,8,1,bachelor,Moderately Likely to Select
+7,7,10,3,1,bachelor,Moderately Likely to Select
+8,0,9,4,5,highschool,Moderately Likely to Select
+5,2,7,10,9,master,Moderately Likely to Select
+3,7,1,6,6,bachelor,Low Selection Probability
+8,14,8,10,3,bachelor,Moderately Likely to Select
+6,4,4,3,3,bachelor,Low Selection Probability
+3,2,3,2,7,bachelor,Low Selection Probability
+1,18,7,6,6,bachelor,Moderately Likely to Select
+3,0,3,5,9,master,Moderately Likely to Select
+5,14,8,10,6,master,Moderately Likely to Select
+3,7,6,5,5,master,Low Selection Probability
+1,1,5,10,10,master,Moderately Likely to Select
+5,2,4,5,7,bachelor,Moderately Likely to Select
+10,13,8,10,1,highschool,Moderately Likely to Select
+7,13,8,5,7,bachelor,Moderately Likely to Select
+7,10,1,3,3,highschool,Low Selection Probability
+9,15,9,7,9,phd,Highly Likely to Select
+10,3,5,6,6,bachelor,Moderately Likely to Select
+10,19,4,4,9,bachelor,Moderately Likely to Select
+3,4,6,2,5,master,Low Selection Probability
+7,20,6,9,7,phd,Moderately Likely to Select
+1,13,2,1,4,master,Low Selection Probability
+4,15,8,4,7,highschool,Moderately Likely to Select
+4,17,7,1,1,highschool,Low Selection Probability
+5,6,1,6,7,bachelor,Low Selection Probability
+7,9,5,4,8,bachelor,Moderately Likely to Select
+7,6,6,5,5,highschool,Moderately Likely to Select
+4,0,4,5,2,bachelor,Low Selection Probability
+7,20,2,9,5,phd,Moderately Likely to Select
+3,18,4,1,6,bachelor,Low Selection Probability
+6,15,1,2,2,master,Low Selection Probability
+2,18,7,6,6,master,Moderately Likely to Select
+10,3,2,5,6,bachelor,Moderately Likely to Select
+9,17,2,7,1,master,Low Selection Probability
+5,1,9,3,1,bachelor,Low Selection Probability
+6,0,5,3,10,bachelor,Moderately Likely to Select
+4,14,2,10,3,master,Low Selection Probability
+10,4,9,2,10,bachelor,Moderately Likely to Select
+7,19,9,3,10,phd,Moderately Likely to Select
+9,10,1,10,3,bachelor,Moderately Likely to Select
+7,9,3,1,4,bachelor,Low Selection Probability
+1,1,4,5,2,bachelor,Low Selection Probability
+1,2,7,5,9,bachelor,Moderately Likely to Select
+9,11,10,7,10,highschool,Highly Likely to Select
+9,19,4,4,7,master,Moderately Likely to Select
+4,4,2,3,7,master,Low Selection Probability
+9,4,7,1,6,master,Moderately Likely to Select
+3,5,6,8,3,bachelor,Moderately Likely to Select
+7,8,3,3,6,master,Low Selection Probability
+6,1,6,2,8,master,Moderately Likely to Select
+8,20,6,4,8,master,Moderately Likely to Select
+9,11,5,3,9,bachelor,Moderately Likely to Select
+5,2,4,1,1,master,Low Selection Probability
+1,19,10,3,1,master,Low Selection Probability
+3,11,1,2,3,bachelor,Low Selection Probability
+10,16,10,8,3,master,Moderately Likely to Select
+8,9,6,6,10,bachelor,Moderately Likely to Select
+6,13,2,9,8,bachelor,Moderately Likely to Select
+8,16,3,8,10,highschool,Moderately Likely to Select
+9,17,8,10,1,bachelor,Moderately Likely to Select
+4,18,10,3,2,bachelor,Low Selection Probability
+1,16,6,5,2,master,Low Selection Probability
+1,13,3,7,3,bachelor,Low Selection Probability
+10,8,7,5,6,master,Moderately Likely to Select
+4,7,4,8,1,master,Low Selection Probability
+7,1,9,5,2,bachelor,Moderately Likely to Select
+2,12,5,1,1,master,Low Selection Probability
+3,6,3,5,5,phd,Low Selection Probability
+1,8,2,4,7,master,Low Selection Probability
+5,10,2,6,8,master,Moderately Likely to Select
+1,13,3,3,10,phd,Low Selection Probability
+8,3,2,5,1,master,Low Selection Probability
+1,12,4,2,7,bachelor,Low Selection Probability
+1,1,2,6,5,master,Low Selection Probability
+2,4,10,6,10,master,Moderately Likely to Select
+2,10,9,5,1,bachelor,Low Selection Probability
+6,5,2,6,3,bachelor,Low Selection Probability
+7,17,9,7,7,master,Moderately Likely to Select
+5,20,6,5,10,highschool,Moderately Likely to Select
+1,9,1,1,1,phd,Low Selection Probability
+1,3,4,8,7,bachelor,Moderately Likely to Select
+3,8,1,4,5,bachelor,Low Selection Probability
+2,5,6,9,1,bachelor,Low Selection Probability
+5,1,4,10,1,highschool,Moderately Likely to Select
+10,16,3,6,1,master,Moderately Likely to Select
+6,4,3,1,9,phd,Low Selection Probability
+7,5,9,3,3,master,Moderately Likely to Select
+4,11,6,3,5,bachelor,Low Selection Probability
+7,20,9,10,10,bachelor,Highly Likely to Select
+8,9,5,4,9,master,Moderately Likely to Select
+1,20,2,6,6,phd,Low Selection Probability
+6,5,8,7,9,bachelor,Moderately Likely to Select
+8,7,5,10,8,bachelor,Moderately Likely to Select
+5,1,2,4,8,bachelor,Low Selection Probability
+4,11,4,6,1,master,Low Selection Probability
+2,12,9,1,9,master,Moderately Likely to Select
+6,20,4,8,6,bachelor,Moderately Likely to Select
+6,6,4,7,9,bachelor,Moderately Likely to Select
+1,9,2,9,3,master,Low Selection Probability
+9,12,6,3,3,highschool,Moderately Likely to Select
+6,16,2,2,6,bachelor,Low Selection Probability
+3,20,7,1,9,bachelor,Moderately Likely to Select
+4,13,3,3,7,bachelor,Low Selection Probability
+4,1,3,5,3,highschool,Low Selection Probability
+3,10,5,2,3,master,Low Selection Probability
+10,0,3,3,2,master,Low Selection Probability
+3,18,2,4,9,master,Low Selection Probability
+3,20,10,7,3,master,Moderately Likely to Select
+4,3,9,3,5,bachelor,Moderately Likely to Select
+7,18,2,9,9,master,Moderately Likely to Select
+4,20,2,8,8,bachelor,Moderately Likely to Select
+9,10,8,4,2,master,Moderately Likely to Select
+1,7,9,1,3,phd,Low Selection Probability
+8,10,7,1,2,bachelor,Low Selection Probability
+7,3,3,1,8,bachelor,Low Selection Probability
+2,16,9,1,6,bachelor,Low Selection Probability
+8,6,3,8,6,bachelor,Moderately Likely to Select
+1,7,5,3,9,highschool,Low Selection Probability
+9,2,9,6,8,master,Highly Likely to Select
+9,1,3,3,4,phd,Low Selection Probability
+2,14,7,5,4,bachelor,Low Selection Probability
+7,4,1,7,9,highschool,Moderately Likely to Select
+10,0,4,2,1,highschool,Low Selection Probability
+3,3,4,6,2,master,Low Selection Probability
+7,14,7,6,2,bachelor,Moderately Likely to Select
+10,19,8,3,6,bachelor,Moderately Likely to Select
+9,18,1,6,4,bachelor,Moderately Likely to Select
+4,2,5,10,10,bachelor,Moderately Likely to Select
+1,19,7,10,3,bachelor,Moderately Likely to Select
+2,10,4,5,3,master,Low Selection Probability
+1,16,4,2,3,bachelor,Low Selection Probability
+5,12,4,9,6,master,Moderately Likely to Select
+5,10,6,8,8,bachelor,Moderately Likely to Select
+7,1,7,3,7,master,Moderately Likely to Select
+9,8,2,8,4,master,Moderately Likely to Select
+9,1,5,9,4,bachelor,Moderately Likely to Select
+3,20,4,3,10,bachelor,Moderately Likely to Select
+3,8,3,3,2,bachelor,Low Selection Probability
+3,8,7,2,1,master,Low Selection Probability
+4,7,6,8,9,bachelor,Moderately Likely to Select
+8,16,7,10,2,phd,Moderately Likely to Select
+6,0,5,1,8,highschool,Moderately Likely to Select
+8,10,6,8,9,master,Moderately Likely to Select
+1,7,5,7,4,master,Low Selection Probability
+8,9,7,7,8,master,Moderately Likely to Select
+4,6,2,3,9,bachelor,Low Selection Probability
+1,2,5,1,10,bachelor,Low Selection Probability
+8,2,6,4,10,master,Moderately Likely to Select
+4,17,6,9,5,bachelor,Moderately Likely to Select
+6,4,5,5,7,bachelor,Moderately Likely to Select
+8,11,10,1,10,bachelor,Moderately Likely to Select
+4,11,7,5,4,bachelor,Moderately Likely to Select
+3,18,10,8,1,bachelor,Moderately Likely to Select
+9,5,8,8,3,bachelor,Moderately Likely to Select
+3,1,7,5,5,bachelor,Moderately Likely to Select
+9,11,5,9,3,master,Moderately Likely to Select
+2,18,1,1,7,master,Low Selection Probability
+2,4,5,4,9,master,Moderately Likely to Select
+2,11,10,3,6,phd,Moderately Likely to Select
+6,16,2,2,10,bachelor,Moderately Likely to Select
+3,16,5,8,1,highschool,Low Selection Probability
+9,9,5,7,7,highschool,Moderately Likely to Select
+4,16,2,9,3,bachelor,Low Selection Probability
+1,14,5,2,5,phd,Low Selection Probability
+4,11,4,4,10,bachelor,Moderately Likely to Select
+1,15,1,6,4,bachelor,Low Selection Probability
+5,18,3,3,10,bachelor,Moderately Likely to Select
+4,7,1,8,5,bachelor,Low Selection Probability
+8,20,5,3,5,master,Moderately Likely to Select
+8,16,4,2,6,bachelor,Moderately Likely to Select
+7,4,7,3,10,phd,Moderately Likely to Select
+3,15,5,6,10,bachelor,Moderately Likely to Select
+1,5,10,2,6,bachelor,Low Selection Probability
+1,7,4,8,8,master,Moderately Likely to Select
+3,17,2,1,8,highschool,Low Selection Probability
+6,11,4,7,9,phd,Moderately Likely to Select
+7,14,2,2,8,phd,Low Selection Probability
+6,8,8,10,2,master,Moderately Likely to Select
+6,12,3,6,10,master,Moderately Likely to Select
+6,14,9,2,1,bachelor,Low Selection Probability
+3,9,4,2,10,phd,Low Selection Probability
+6,15,6,10,2,bachelor,Moderately Likely to Select
+8,6,10,8,2,master,Moderately Likely to Select
+2,16,5,2,3,phd,Low Selection Probability
+5,20,10,7,10,phd,Highly Likely to Select
+1,6,1,3,7,master,Low Selection Probability
+1,13,9,8,2,bachelor,Moderately Likely to Select
+5,14,1,7,1,phd,Low Selection Probability
+3,20,8,8,6,master,Moderately Likely to Select
+4,6,9,7,9,phd,Moderately Likely to Select
+3,8,9,6,3,master,Moderately Likely to Select
+1,18,1,7,6,bachelor,Low Selection Probability
+1,15,2,5,3,bachelor,Low Selection Probability
+5,7,1,7,1,bachelor,Low Selection Probability
+6,17,10,1,5,master,Moderately Likely to Select
+3,17,2,1,10,bachelor,Low Selection Probability
+9,19,10,9,4,bachelor,Highly Likely to Select
+5,6,8,5,7,bachelor,Moderately Likely to Select
+8,2,5,5,6,master,Moderately Likely to Select
+1,17,7,3,10,bachelor,Moderately Likely to Select
+5,9,2,5,7,highschool,Low Selection Probability
+3,6,8,3,5,bachelor,Low Selection Probability
+1,16,6,9,4,highschool,Moderately Likely to Select
+4,13,8,9,7,bachelor,Moderately Likely to Select
+5,2,1,6,7,bachelor,Low Selection Probability
+7,11,1,1,6,bachelor,Low Selection Probability
+1,12,7,7,8,phd,Moderately Likely to Select
+3,1,8,7,4,master,Moderately Likely to Select
+2,2,3,10,10,bachelor,Moderately Likely to Select
+9,4,5,10,5,phd,Moderately Likely to Select
+10,10,1,4,4,highschool,Low Selection Probability
+6,7,7,8,1,master,Moderately Likely to Select
+10,11,5,6,8,master,Moderately Likely to Select
+3,6,8,4,1,bachelor,Low Selection Probability
+8,14,8,4,5,bachelor,Moderately Likely to Select
+8,16,9,2,6,bachelor,Moderately Likely to Select
+2,3,7,2,6,bachelor,Low Selection Probability
+6,12,1,4,5,master,Low Selection Probability
+7,17,3,5,3,bachelor,Low Selection Probability
+2,0,8,8,5,bachelor,Moderately Likely to Select
+10,15,3,6,8,bachelor,Moderately Likely to Select
+2,12,8,4,2,bachelor,Low Selection Probability
+10,9,1,7,6,bachelor,Moderately Likely to Select
+1,11,5,8,9,bachelor,Moderately Likely to Select
+8,1,4,2,8,master,Moderately Likely to Select
+1,2,5,7,8,bachelor,Moderately Likely to Select
+9,9,8,2,8,bachelor,Moderately Likely to Select
+6,1,10,2,7,master,Moderately Likely to Select
+7,12,4,8,8,highschool,Moderately Likely to Select
+10,12,4,2,6,master,Moderately Likely to Select
+7,17,3,9,2,master,Moderately Likely to Select
+10,2,7,1,2,bachelor,Moderately Likely to Select
+3,6,3,9,8,highschool,Moderately Likely to Select
+2,13,3,1,1,bachelor,Low Selection Probability
+9,19,10,10,6,highschool,Highly Likely to Select
+8,16,5,10,6,bachelor,Moderately Likely to Select
+10,20,5,2,4,bachelor,Moderately Likely to Select
+7,11,6,6,10,bachelor,Moderately Likely to Select
+9,15,8,6,3,bachelor,Moderately Likely to Select
+4,11,10,1,3,master,Low Selection Probability
+4,14,6,7,1,bachelor,Low Selection Probability
+1,9,1,8,3,bachelor,Low Selection Probability
+8,6,8,2,4,bachelor,Moderately Likely to Select
+3,19,8,8,5,master,Moderately Likely to Select
+7,4,9,9,3,bachelor,Moderately Likely to Select
+2,0,9,6,6,master,Moderately Likely to Select
+2,16,2,5,5,bachelor,Low Selection Probability
+7,2,2,9,3,master,Moderately Likely to Select
+6,12,3,9,6,bachelor,Moderately Likely to Select
+3,13,1,1,6,bachelor,Low Selection Probability
+9,17,4,3,8,bachelor,Moderately Likely to Select
+10,3,4,9,2,bachelor,Moderately Likely to Select
+6,17,9,2,1,bachelor,Low Selection Probability
+10,4,9,4,4,bachelor,Moderately Likely to Select
+10,15,9,4,7,master,Moderately Likely to Select
+6,0,10,2,10,phd,Moderately Likely to Select
+1,20,7,3,3,bachelor,Low Selection Probability
+4,13,2,3,3,bachelor,Low Selection Probability
+10,14,10,1,5,bachelor,Moderately Likely to Select
+6,8,5,6,5,master,Moderately Likely to Select
+6,14,4,8,10,bachelor,Moderately Likely to Select
+5,16,8,3,3,phd,Low Selection Probability
+1,3,2,5,9,bachelor,Low Selection Probability
+8,11,6,1,4,bachelor,Low Selection Probability
+5,4,5,10,3,master,Moderately Likely to Select
+5,4,2,7,2,master,Low Selection Probability
+7,10,10,10,10,bachelor,Highly Likely to Select
+4,5,1,1,9,bachelor,Low Selection Probability
+6,6,8,9,4,phd,Moderately Likely to Select
+4,13,2,8,3,highschool,Low Selection Probability
+3,10,7,7,7,master,Moderately Likely to Select
+7,12,9,10,8,bachelor,Highly Likely to Select
+8,1,9,7,2,master,Moderately Likely to Select
+4,6,8,5,7,master,Moderately Likely to Select
+2,19,10,5,5,bachelor,Moderately Likely to Select
+10,3,9,5,5,master,Moderately Likely to Select
+3,7,2,1,3,highschool,Low Selection Probability
+1,19,6,8,5,bachelor,Moderately Likely to Select
+8,20,4,1,2,bachelor,Low Selection Probability
+3,18,4,4,4,bachelor,Low Selection Probability
+10,12,5,9,6,master,Moderately Likely to Select
+7,13,3,9,1,highschool,Moderately Likely to Select
+10,9,1,5,10,bachelor,Moderately Likely to Select
+5,10,8,4,4,bachelor,Moderately Likely to Select
+10,1,5,3,6,bachelor,Moderately Likely to Select
+5,8,3,3,9,bachelor,Moderately Likely to Select
+7,16,10,5,2,master,Moderately Likely to Select
+9,2,7,10,7,phd,Highly Likely to Select
+5,5,7,1,6,master,Low Selection Probability
+1,4,1,5,2,bachelor,Low Selection Probability
+10,4,9,6,8,bachelor,Highly Likely to Select
+10,14,2,7,7,bachelor,Moderately Likely to Select
+1,16,5,9,5,bachelor,Moderately Likely to Select
+2,8,5,3,5,bachelor,Low Selection Probability
+6,2,8,2,7,highschool,Moderately Likely to Select
+9,19,8,3,9,bachelor,Moderately Likely to Select
+8,16,7,9,9,phd,Highly Likely to Select
+5,9,7,7,9,bachelor,Moderately Likely to Select
+1,2,6,9,6,bachelor,Moderately Likely to Select
+7,17,6,2,10,highschool,Moderately Likely to Select
+5,17,9,5,6,bachelor,Moderately Likely to Select
+6,16,6,4,3,master,Low Selection Probability
+7,2,2,2,1,bachelor,Low Selection Probability
+3,2,2,9,7,bachelor,Moderately Likely to Select
+10,5,5,9,4,highschool,Moderately Likely to Select
+3,12,4,6,1,bachelor,Low Selection Probability
+5,14,2,6,8,highschool,Moderately Likely to Select
+6,8,3,8,6,master,Moderately Likely to Select
+9,3,7,6,6,master,Moderately Likely to Select
+5,13,8,1,2,master,Low Selection Probability
+1,4,6,4,1,bachelor,Low Selection Probability
+4,1,5,7,2,master,Low Selection Probability
+5,10,1,2,4,bachelor,Low Selection Probability
+10,8,8,9,2,bachelor,Moderately Likely to Select
+10,2,3,8,1,master,Moderately Likely to Select
+5,8,6,8,7,highschool,Moderately Likely to Select
+7,2,3,7,8,bachelor,Moderately Likely to Select
+4,1,7,4,6,master,Moderately Likely to Select
+1,11,7,2,4,bachelor,Low Selection Probability
+5,9,9,3,6,bachelor,Moderately Likely to Select
+7,8,5,6,3,bachelor,Moderately Likely to Select
+10,14,8,5,8,master,Moderately Likely to Select
+10,7,10,8,10,phd,Highly Likely to Select
+6,4,10,6,2,master,Moderately Likely to Select
+5,10,8,6,5,bachelor,Moderately Likely to Select
+4,1,1,1,1,bachelor,Low Selection Probability
+2,14,5,4,6,bachelor,Low Selection Probability
+4,5,3,5,2,highschool,Low Selection Probability
+10,7,1,3,4,highschool,Low Selection Probability
+10,4,4,9,6,bachelor,Moderately Likely to Select
+3,15,8,1,10,bachelor,Moderately Likely to Select
+10,17,3,6,8,phd,Moderately Likely to Select
+1,5,10,6,8,bachelor,Moderately Likely to Select
+8,4,2,10,6,bachelor,Moderately Likely to Select
+5,15,9,5,4,bachelor,Moderately Likely to Select
+4,12,10,5,8,phd,Moderately Likely to Select
+8,4,5,10,8,master,Moderately Likely to Select
+7,12,7,5,10,master,Moderately Likely to Select
+2,16,2,6,1,phd,Low Selection Probability
+1,17,9,8,4,bachelor,Moderately Likely to Select
+4,7,9,2,4,bachelor,Low Selection Probability
+8,12,4,6,7,bachelor,Moderately Likely to Select
+2,18,4,1,7,bachelor,Low Selection Probability
+3,2,6,4,8,bachelor,Moderately Likely to Select
+1,7,10,10,5,bachelor,Moderately Likely to Select
+1,1,10,3,7,phd,Moderately Likely to Select
+3,7,10,9,8,phd,Moderately Likely to Select
+5,12,6,3,9,master,Moderately Likely to Select
+3,12,1,6,3,master,Low Selection Probability
+1,0,9,1,3,master,Low Selection Probability
+1,5,2,6,4,bachelor,Low Selection Probability
+8,18,5,4,5,highschool,Moderately Likely to Select
+10,15,9,8,10,master,Highly Likely to Select
+2,7,4,9,1,master,Low Selection Probability
+3,0,3,4,7,highschool,Low Selection Probability
+2,15,7,10,9,phd,Moderately Likely to Select
+3,8,6,10,8,highschool,Moderately Likely to Select
+7,12,8,6,5,bachelor,Moderately Likely to Select
+1,10,3,1,4,master,Low Selection Probability
+10,12,5,4,7,bachelor,Moderately Likely to Select
+8,20,10,7,5,highschool,Moderately Likely to Select
+10,9,4,1,7,bachelor,Moderately Likely to Select
+10,3,4,8,1,master,Moderately Likely to Select
+10,5,4,10,1,bachelor,Moderately Likely to Select
+2,6,10,6,10,master,Moderately Likely to Select
+3,4,8,5,3,bachelor,Low Selection Probability
+9,10,6,10,2,highschool,Moderately Likely to Select
+7,12,3,9,2,phd,Moderately Likely to Select
+4,18,10,2,7,highschool,Moderately Likely to Select
+10,9,5,5,10,phd,Moderately Likely to Select
+5,9,6,6,2,bachelor,Low Selection Probability
+2,10,5,7,4,phd,Low Selection Probability
+8,20,6,5,2,bachelor,Moderately Likely to Select
+4,6,8,9,6,bachelor,Moderately Likely to Select
+9,17,7,1,8,bachelor,Moderately Likely to Select
+5,3,5,7,10,highschool,Moderately Likely to Select
+9,1,10,10,4,master,Highly Likely to Select
+4,13,6,7,5,bachelor,Moderately Likely to Select
+10,12,4,4,4,bachelor,Moderately Likely to Select
+5,11,9,9,3,bachelor,Moderately Likely to Select
+9,6,4,5,5,bachelor,Moderately Likely to Select
+8,1,1,4,9,master,Moderately Likely to Select
+3,12,7,7,8,bachelor,Moderately Likely to Select
+1,13,7,4,8,master,Moderately Likely to Select
+3,16,4,3,8,master,Low Selection Probability
+4,8,3,9,8,master,Moderately Likely to Select
+2,16,8,8,7,bachelor,Moderately Likely to Select
+1,7,5,1,8,master,Low Selection Probability
+7,1,10,7,8,phd,Highly Likely to Select
+8,12,7,9,8,master,Highly Likely to Select
+7,2,4,8,10,bachelor,Moderately Likely to Select
+5,15,4,8,7,master,Moderately Likely to Select
+1,5,8,6,1,master,Low Selection Probability
+7,18,8,4,4,master,Moderately Likely to Select
+7,6,2,8,4,highschool,Moderately Likely to Select
+9,9,2,3,5,bachelor,Low Selection Probability
+3,8,3,9,10,master,Moderately Likely to Select
+9,1,3,2,6,bachelor,Moderately Likely to Select
+1,14,1,2,4,master,Low Selection Probability
+1,4,3,7,2,bachelor,Low Selection Probability
+4,3,6,10,6,bachelor,Moderately Likely to Select
+9,19,8,4,8,highschool,Moderately Likely to Select
+6,3,10,10,8,bachelor,Highly Likely to Select
+3,17,6,8,7,phd,Moderately Likely to Select
+1,3,5,9,6,master,Moderately Likely to Select
+4,16,4,7,2,master,Low Selection Probability
+9,11,3,5,7,bachelor,Moderately Likely to Select
+3,16,4,8,5,master,Moderately Likely to Select
+9,9,7,4,6,master,Moderately Likely to Select
+7,0,1,2,10,bachelor,Moderately Likely to Select
+4,17,7,6,8,highschool,Moderately Likely to Select
+3,17,1,9,8,master,Moderately Likely to Select
+10,13,2,1,3,master,Low Selection Probability
+5,14,4,10,7,phd,Moderately Likely to Select
+5,11,1,7,1,highschool,Low Selection Probability
+3,3,9,10,1,master,Moderately Likely to Select
+9,2,6,9,7,bachelor,Moderately Likely to Select
+4,19,1,10,10,bachelor,Moderately Likely to Select
+5,11,1,9,9,bachelor,Moderately Likely to Select
+4,6,6,10,7,bachelor,Moderately Likely to Select
+5,10,4,3,10,bachelor,Moderately Likely to Select
+7,0,4,5,5,bachelor,Moderately Likely to Select
+9,5,6,8,8,master,Moderately Likely to Select
+7,14,7,8,2,master,Moderately Likely to Select
+5,14,9,4,9,bachelor,Moderately Likely to Select
+10,18,10,1,6,phd,Moderately Likely to Select
+10,10,5,1,9,bachelor,Moderately Likely to Select
+7,1,9,4,2,bachelor,Moderately Likely to Select
+10,13,4,6,3,master,Moderately Likely to Select
+5,1,10,8,8,bachelor,Moderately Likely to Select
+3,3,2,6,1,bachelor,Low Selection Probability
+7,16,3,9,10,bachelor,Moderately Likely to Select
+2,2,1,9,7,highschool,Low Selection Probability
+9,12,6,2,7,master,Moderately Likely to Select
+10,8,6,10,1,bachelor,Moderately Likely to Select
+10,6,1,1,9,bachelor,Moderately Likely to Select
+1,14,3,2,8,highschool,Low Selection Probability
+6,10,5,5,4,master,Moderately Likely to Select
+7,19,3,4,10,bachelor,Moderately Likely to Select
+8,1,10,4,5,master,Moderately Likely to Select
+10,14,3,9,2,bachelor,Moderately Likely to Select
+9,13,10,8,9,bachelor,Highly Likely to Select
+2,19,3,6,6,bachelor,Low Selection Probability
+10,10,5,1,3,bachelor,Low Selection Probability
+2,2,5,2,7,bachelor,Low Selection Probability
+5,16,4,6,9,bachelor,Moderately Likely to Select
+5,11,1,2,3,phd,Low Selection Probability
+6,20,5,10,2,highschool,Moderately Likely to Select
+3,14,10,5,7,master,Moderately Likely to Select
+8,15,5,5,7,bachelor,Moderately Likely to Select
+1,4,4,6,4,bachelor,Low Selection Probability
+6,19,6,6,9,bachelor,Moderately Likely to Select
+4,5,10,6,8,phd,Moderately Likely to Select
+1,18,4,2,1,bachelor,Low Selection Probability
+7,4,7,10,1,highschool,Moderately Likely to Select
+9,2,7,3,5,bachelor,Moderately Likely to Select
+4,0,2,6,6,bachelor,Low Selection Probability
+4,5,3,8,3,bachelor,Low Selection Probability
+6,14,1,1,9,bachelor,Low Selection Probability
+3,1,8,1,10,highschool,Moderately Likely to Select
+6,2,9,2,6,highschool,Moderately Likely to Select
+7,16,4,6,4,master,Moderately Likely to Select
+10,11,6,9,7,bachelor,Highly Likely to Select
+10,17,9,4,8,bachelor,Moderately Likely to Select
+3,14,6,3,9,bachelor,Moderately Likely to Select
+7,11,9,8,6,master,Moderately Likely to Select
+3,15,4,10,6,bachelor,Moderately Likely to Select
+2,7,8,9,8,bachelor,Moderately Likely to Select
+10,13,9,5,5,bachelor,Moderately Likely to Select
+4,16,4,9,3,bachelor,Moderately Likely to Select
+8,20,5,2,3,bachelor,Low Selection Probability
+9,7,8,3,6,master,Moderately Likely to Select
+7,14,10,7,2,master,Moderately Likely to Select
+1,13,6,7,6,master,Moderately Likely to Select
+3,17,7,6,6,bachelor,Moderately Likely to Select
+9,19,3,6,8,bachelor,Moderately Likely to Select
+1,6,7,2,7,bachelor,Low Selection Probability
+9,2,8,10,8,bachelor,Highly Likely to Select
+8,11,10,6,9,bachelor,Highly Likely to Select
+1,20,6,4,6,master,Low Selection Probability
+6,2,10,3,3,bachelor,Moderately Likely to Select
+5,19,9,2,10,bachelor,Moderately Likely to Select
+6,13,6,1,3,bachelor,Low Selection Probability
+10,14,9,5,1,bachelor,Moderately Likely to Select
+5,13,4,2,5,highschool,Low Selection Probability
+6,6,8,2,4,master,Moderately Likely to Select
+5,16,4,7,9,bachelor,Moderately Likely to Select
+5,11,2,8,9,master,Moderately Likely to Select
+4,19,10,10,5,master,Moderately Likely to Select
+3,3,9,8,10,master,Moderately Likely to Select
+3,8,5,4,4,bachelor,Low Selection Probability
+4,5,4,1,7,highschool,Low Selection Probability
+9,15,2,7,6,bachelor,Moderately Likely to Select
+2,20,1,1,4,master,Low Selection Probability
+9,20,7,4,10,bachelor,Moderately Likely to Select
+1,1,6,8,2,master,Low Selection Probability
+1,7,2,2,1,bachelor,Low Selection Probability
+5,10,8,6,4,bachelor,Moderately Likely to Select
+6,12,4,6,4,bachelor,Moderately Likely to Select
+6,16,8,9,1,bachelor,Moderately Likely to Select
+3,7,7,5,6,bachelor,Moderately Likely to Select
+7,20,5,10,4,master,Moderately Likely to Select
+9,17,10,4,1,master,Moderately Likely to Select
+10,17,10,5,1,master,Moderately Likely to Select
+8,13,8,10,1,master,Moderately Likely to Select
+6,14,9,5,8,master,Moderately Likely to Select
+8,5,5,8,10,highschool,Moderately Likely to Select
+5,10,10,10,8,master,Highly Likely to Select
+8,12,5,8,2,bachelor,Moderately Likely to Select
+10,0,2,2,7,bachelor,Moderately Likely to Select
+4,5,5,7,8,master,Moderately Likely to Select
+10,8,3,8,8,bachelor,Moderately Likely to Select
+8,7,7,6,10,highschool,Moderately Likely to Select
+10,10,10,5,7,bachelor,Highly Likely to Select
+2,18,5,9,5,highschool,Moderately Likely to Select
+5,8,8,3,1,phd,Low Selection Probability
+9,16,1,10,9,highschool,Moderately Likely to Select
+4,11,3,4,7,bachelor,Low Selection Probability
+6,13,3,9,2,bachelor,Moderately Likely to Select
+1,14,9,6,6,bachelor,Moderately Likely to Select
+9,15,5,8,2,phd,Moderately Likely to Select
+1,19,9,7,1,highschool,Low Selection Probability
+5,0,9,2,7,bachelor,Moderately Likely to Select
+4,9,1,3,2,master,Low Selection Probability
+3,7,2,1,2,phd,Low Selection Probability
+6,17,5,9,5,master,Moderately Likely to Select
+2,0,4,7,5,master,Low Selection Probability
+3,1,10,1,7,highschool,Moderately Likely to Select
+5,0,9,3,1,bachelor,Low Selection Probability
+9,0,7,4,8,bachelor,Moderately Likely to Select
+2,8,6,4,3,master,Low Selection Probability
+10,12,7,5,4,bachelor,Moderately Likely to Select
+8,0,1,3,9,bachelor,Moderately Likely to Select
+2,12,1,3,4,bachelor,Low Selection Probability
+5,19,8,1,10,highschool,Moderately Likely to Select
+7,6,2,7,5,bachelor,Moderately Likely to Select
+8,1,10,10,7,phd,Highly Likely to Select
+1,5,9,1,4,bachelor,Low Selection Probability
+6,6,7,2,1,master,Low Selection Probability
+1,13,6,4,9,master,Moderately Likely to Select
+2,17,1,4,4,bachelor,Low Selection Probability
+1,14,1,5,9,bachelor,Low Selection Probability
+5,1,2,2,6,bachelor,Low Selection Probability
+10,9,6,4,1,bachelor,Moderately Likely to Select
+9,11,6,1,3,master,Low Selection Probability
+6,16,2,2,2,bachelor,Low Selection Probability
+1,7,1,1,9,highschool,Low Selection Probability
+1,10,10,10,1,bachelor,Moderately Likely to Select
+2,2,5,10,9,phd,Moderately Likely to Select
+9,5,5,4,9,master,Moderately Likely to Select
+3,8,2,4,8,master,Low Selection Probability
+1,5,6,7,8,master,Moderately Likely to Select
+5,8,9,10,1,bachelor,Moderately Likely to Select
+7,6,2,9,8,master,Moderately Likely to Select
+6,8,10,9,10,bachelor,Highly Likely to Select
+1,17,2,5,3,master,Low Selection Probability
+5,11,3,10,7,master,Moderately Likely to Select
+5,7,7,1,1,highschool,Low Selection Probability
+6,7,6,1,1,master,Low Selection Probability
+3,17,8,6,10,phd,Moderately Likely to Select
+5,19,8,2,5,bachelor,Moderately Likely to Select
+7,14,6,8,5,master,Moderately Likely to Select
+5,6,10,9,8,highschool,Highly Likely to Select
+5,10,3,4,7,bachelor,Low Selection Probability
+5,19,3,5,8,bachelor,Moderately Likely to Select
+10,15,1,8,6,bachelor,Moderately Likely to Select
+10,3,7,3,6,phd,Moderately Likely to Select
+3,5,5,5,2,master,Low Selection Probability
+1,2,4,3,6,master,Low Selection Probability
+5,8,10,10,5,bachelor,Moderately Likely to Select
+9,9,4,3,3,phd,Low Selection Probability
+1,13,4,3,6,highschool,Low Selection Probability
+3,10,6,7,8,master,Moderately Likely to Select
+4,17,8,7,9,bachelor,Moderately Likely to Select
+1,11,8,7,1,highschool,Low Selection Probability
+1,11,5,10,3,master,Low Selection Probability
+8,12,6,8,3,bachelor,Moderately Likely to Select
+2,12,4,5,8,bachelor,Low Selection Probability
+8,18,9,5,1,bachelor,Moderately Likely to Select
+7,18,8,4,5,highschool,Moderately Likely to Select
+10,13,10,7,3,bachelor,Moderately Likely to Select
+10,3,10,10,2,highschool,Highly Likely to Select
+2,12,1,4,8,bachelor,Low Selection Probability
+6,7,2,2,3,highschool,Low Selection Probability
+6,20,9,4,7,master,Moderately Likely to Select
+3,18,8,8,1,bachelor,Moderately Likely to Select
+2,11,3,9,6,phd,Moderately Likely to Select
+1,17,8,3,3,master,Low Selection Probability
+6,5,1,7,8,bachelor,Moderately Likely to Select
+5,17,10,9,6,master,Moderately Likely to Select
+9,18,4,4,2,master,Low Selection Probability
+1,4,3,10,6,phd,Moderately Likely to Select
+7,8,6,3,7,bachelor,Moderately Likely to Select
+5,2,7,5,5,highschool,Moderately Likely to Select
+5,9,4,1,3,master,Low Selection Probability
+2,18,7,3,4,master,Low Selection Probability
+3,2,9,8,4,master,Moderately Likely to Select
+7,14,2,8,6,bachelor,Moderately Likely to Select
+6,0,3,4,10,master,Moderately Likely to Select
+2,6,5,2,1,phd,Low Selection Probability
+6,11,3,8,4,bachelor,Moderately Likely to Select
+2,16,8,8,10,highschool,Moderately Likely to Select
+2,20,10,10,4,bachelor,Moderately Likely to Select
+2,19,8,4,10,master,Moderately Likely to Select
+3,4,8,3,1,master,Low Selection Probability
+2,3,9,2,9,master,Moderately Likely to Select
+4,11,4,9,4,bachelor,Moderately Likely to Select
+9,19,5,1,7,bachelor,Moderately Likely to Select
+6,17,5,7,3,bachelor,Moderately Likely to Select
+1,16,8,5,10,bachelor,Moderately Likely to Select
+8,18,7,8,3,master,Moderately Likely to Select
+7,8,9,4,8,phd,Moderately Likely to Select
+10,3,8,7,8,phd,Highly Likely to Select
+3,20,2,5,1,phd,Low Selection Probability
+1,1,10,5,10,bachelor,Moderately Likely to Select
+5,3,4,9,2,bachelor,Moderately Likely to Select
+4,1,6,9,8,master,Moderately Likely to Select
+10,14,2,9,1,phd,Moderately Likely to Select
+8,1,7,6,8,bachelor,Moderately Likely to Select
+1,3,3,6,8,bachelor,Low Selection Probability
+10,5,3,5,2,bachelor,Moderately Likely to Select
+1,6,2,9,4,master,Low Selection Probability
+4,9,8,10,6,bachelor,Moderately Likely to Select
+8,18,6,8,9,bachelor,Moderately Likely to Select
+5,18,1,7,8,highschool,Moderately Likely to Select
+2,11,1,7,8,bachelor,Low Selection Probability
+6,2,7,6,7,master,Moderately Likely to Select
+5,12,8,5,9,bachelor,Moderately Likely to Select
+2,17,5,4,2,master,Low Selection Probability
+3,7,5,3,3,master,Low Selection Probability
+9,20,4,3,10,master,Moderately Likely to Select
+7,14,6,6,8,bachelor,Moderately Likely to Select
+7,0,6,4,6,phd,Moderately Likely to Select
+6,2,3,6,10,bachelor,Moderately Likely to Select
+8,7,9,3,9,phd,Moderately Likely to Select
+4,3,7,4,10,phd,Moderately Likely to Select
+8,15,1,9,4,bachelor,Moderately Likely to Select
+4,9,7,5,8,highschool,Moderately Likely to Select
+8,11,5,7,10,bachelor,Moderately Likely to Select
+9,13,5,10,3,bachelor,Moderately Likely to Select
+3,13,2,2,3,bachelor,Low Selection Probability
+3,1,4,5,8,bachelor,Moderately Likely to Select
+2,4,6,9,5,bachelor,Moderately Likely to Select
+10,4,10,3,3,highschool,Moderately Likely to Select
+3,5,7,9,10,bachelor,Moderately Likely to Select
+3,12,5,6,1,bachelor,Low Selection Probability
+5,8,9,4,3,highschool,Moderately Likely to Select
+5,14,3,7,9,bachelor,Moderately Likely to Select
+2,13,1,8,5,bachelor,Low Selection Probability
+10,6,4,6,10,bachelor,Moderately Likely to Select
+6,19,9,5,2,master,Moderately Likely to Select
+5,1,4,6,7,bachelor,Moderately Likely to Select
+6,6,2,5,2,bachelor,Low Selection Probability
+1,5,10,8,4,bachelor,Moderately Likely to Select
+5,16,5,1,7,master,Low Selection Probability
+9,1,3,7,4,master,Moderately Likely to Select
+10,2,9,10,7,master,Highly Likely to Select
+2,4,4,10,7,master,Moderately Likely to Select
+1,4,6,2,1,bachelor,Low Selection Probability
+10,0,2,9,6,bachelor,Moderately Likely to Select
+9,7,6,1,9,highschool,Moderately Likely to Select
+10,11,3,10,2,phd,Moderately Likely to Select
+9,3,9,6,3,master,Moderately Likely to Select
+9,12,2,9,10,master,Moderately Likely to Select
+6,14,9,1,5,bachelor,Moderately Likely to Select
+8,10,5,4,9,master,Moderately Likely to Select
+1,9,8,4,4,bachelor,Low Selection Probability
+10,2,2,9,1,highschool,Moderately Likely to Select
+4,13,6,5,4,bachelor,Low Selection Probability
+1,15,3,5,6,bachelor,Low Selection Probability
+8,9,10,6,5,bachelor,Moderately Likely to Select
+1,9,5,1,1,master,Low Selection Probability
+3,11,8,1,4,bachelor,Low Selection Probability
+4,8,10,9,6,bachelor,Moderately Likely to Select
+8,0,1,3,10,bachelor,Moderately Likely to Select
+6,4,5,4,10,bachelor,Moderately Likely to Select
+10,19,3,1,4,master,Low Selection Probability
+7,7,4,9,9,master,Moderately Likely to Select
+8,10,2,8,5,master,Moderately Likely to Select
+2,11,9,2,8,master,Moderately Likely to Select
+10,0,3,8,9,master,Moderately Likely to Select
+8,19,2,7,10,bachelor,Moderately Likely to Select
+3,10,10,6,5,master,Moderately Likely to Select
+7,4,9,1,6,bachelor,Moderately Likely to Select
+3,14,7,7,1,bachelor,Low Selection Probability
+7,4,6,10,7,highschool,Moderately Likely to Select
+2,11,1,7,4,master,Low Selection Probability
+10,4,5,9,2,master,Moderately Likely to Select
+6,16,3,1,5,bachelor,Low Selection Probability
+3,16,1,2,3,master,Low Selection Probability
+3,11,4,9,6,phd,Moderately Likely to Select
+9,14,2,9,8,bachelor,Moderately Likely to Select
+7,14,2,6,7,bachelor,Moderately Likely to Select
+5,5,3,6,3,master,Low Selection Probability
+10,11,8,4,8,bachelor,Moderately Likely to Select
+7,19,8,4,2,master,Moderately Likely to Select
+9,17,7,5,10,highschool,Moderately Likely to Select
+1,13,6,3,9,bachelor,Low Selection Probability
+7,1,9,1,4,master,Moderately Likely to Select
+6,8,4,1,1,master,Low Selection Probability
+10,4,1,7,8,master,Moderately Likely to Select
+9,19,8,1,7,master,Moderately Likely to Select
+1,0,7,1,5,master,Low Selection Probability
+4,2,7,3,10,master,Moderately Likely to Select
+9,5,3,10,5,highschool,Moderately Likely to Select
+4,4,4,4,7,bachelor,Low Selection Probability
+10,20,10,4,5,highschool,Moderately Likely to Select
+3,4,9,2,8,master,Moderately Likely to Select
+9,0,6,1,6,bachelor,Moderately Likely to Select
+2,16,5,3,5,bachelor,Low Selection Probability
+4,18,3,4,9,bachelor,Moderately Likely to Select
+6,13,9,3,2,master,Moderately Likely to Select
+2,11,5,8,1,master,Low Selection Probability
+8,9,5,10,8,bachelor,Moderately Likely to Select
+8,19,4,1,3,master,Low Selection Probability
+1,20,4,2,7,bachelor,Low Selection Probability
+3,17,1,7,10,bachelor,Moderately Likely to Select
+10,10,7,4,8,master,Moderately Likely to Select
+9,1,9,8,6,bachelor,Highly Likely to Select
+5,17,3,3,10,phd,Moderately Likely to Select
+6,6,2,6,9,bachelor,Moderately Likely to Select
+4,14,3,9,7,highschool,Moderately Likely to Select
+10,10,1,1,10,phd,Moderately Likely to Select
+2,17,6,1,5,highschool,Low Selection Probability
+8,11,7,8,8,phd,Moderately Likely to Select
+6,5,2,3,2,phd,Low Selection Probability
+5,19,8,5,7,bachelor,Moderately Likely to Select
+9,12,6,1,4,bachelor,Moderately Likely to Select
+1,19,4,5,9,bachelor,Low Selection Probability
+5,15,5,6,1,bachelor,Low Selection Probability
+6,17,8,8,7,highschool,Moderately Likely to Select
+5,9,3,3,6,bachelor,Low Selection Probability
+6,7,3,3,8,bachelor,Moderately Likely to Select
+6,17,4,10,5,bachelor,Moderately Likely to Select
+7,20,1,9,1,phd,Low Selection Probability
+4,0,9,4,1,master,Low Selection Probability
+8,7,8,4,9,master,Moderately Likely to Select
+7,5,8,7,10,bachelor,Highly Likely to Select
+9,4,10,2,6,master,Moderately Likely to Select
+7,14,6,8,10,bachelor,Moderately Likely to Select
+3,14,7,6,5,master,Moderately Likely to Select
+3,1,6,3,1,phd,Low Selection Probability
+8,0,9,9,6,bachelor,Highly Likely to Select
+5,10,3,5,6,master,Low Selection Probability
+4,9,3,8,3,master,Low Selection Probability
+8,17,3,7,8,phd,Moderately Likely to Select
+6,17,10,8,1,master,Moderately Likely to Select
+2,16,3,7,1,bachelor,Low Selection Probability
+4,7,9,3,6,bachelor,Moderately Likely to Select
+4,14,4,2,10,highschool,Moderately Likely to Select
+6,7,7,7,1,master,Moderately Likely to Select
+6,16,9,3,6,highschool,Moderately Likely to Select
+1,11,7,3,1,master,Low Selection Probability
+8,7,9,2,6,bachelor,Moderately Likely to Select
+6,13,3,4,3,bachelor,Low Selection Probability
+3,3,4,8,8,bachelor,Moderately Likely to Select
+9,0,8,1,6,master,Moderately Likely to Select
+2,0,6,1,1,bachelor,Low Selection Probability
+8,18,5,5,5,bachelor,Moderately Likely to Select
+10,15,4,5,8,bachelor,Moderately Likely to Select
+3,13,8,1,3,bachelor,Low Selection Probability
+5,20,1,6,6,bachelor,Low Selection Probability
+6,15,9,1,5,master,Moderately Likely to Select
+10,4,1,5,6,bachelor,Moderately Likely to Select
+6,8,8,9,10,highschool,Highly Likely to Select
+4,1,4,5,1,master,Low Selection Probability
+3,17,9,6,7,phd,Moderately Likely to Select
+4,5,5,8,9,master,Moderately Likely to Select
+1,8,3,1,2,bachelor,Low Selection Probability
+4,0,9,2,10,master,Moderately Likely to Select
+1,8,9,9,5,phd,Moderately Likely to Select
+1,15,4,3,10,master,Low Selection Probability
+10,12,4,6,4,bachelor,Moderately Likely to Select
+6,8,8,5,6,bachelor,Moderately Likely to Select
+5,20,2,2,6,master,Low Selection Probability
+4,12,9,7,2,bachelor,Moderately Likely to Select
+3,8,6,4,2,bachelor,Low Selection Probability
+1,10,9,1,4,master,Low Selection Probability
+6,3,8,4,1,master,Low Selection Probability
+2,1,7,6,9,bachelor,Moderately Likely to Select
+8,5,1,7,7,master,Moderately Likely to Select
+10,13,3,7,7,bachelor,Moderately Likely to Select
+5,3,2,7,3,bachelor,Low Selection Probability
+7,5,5,3,3,master,Low Selection Probability
+10,18,5,6,1,bachelor,Moderately Likely to Select
+2,5,5,8,3,bachelor,Low Selection Probability
+8,1,4,4,3,phd,Low Selection Probability
+2,17,5,8,4,bachelor,Low Selection Probability
+4,12,3,2,4,bachelor,Low Selection Probability
+1,8,1,10,3,phd,Low Selection Probability
+5,18,5,9,10,master,Moderately Likely to Select
+9,12,9,9,8,master,Highly Likely to Select
+1,10,9,8,8,master,Moderately Likely to Select
+9,0,4,10,1,bachelor,Moderately Likely to Select
+8,6,3,10,7,master,Moderately Likely to Select
+6,20,1,1,2,bachelor,Low Selection Probability
+7,14,2,2,1,master,Low Selection Probability
+3,0,8,6,3,bachelor,Moderately Likely to Select
+1,11,1,10,4,master,Low Selection Probability
+5,6,8,5,6,bachelor,Moderately Likely to Select
+2,14,7,9,10,bachelor,Moderately Likely to Select
+5,20,8,5,5,master,Moderately Likely to Select
+8,18,6,2,4,master,Moderately Likely to Select
+9,0,9,10,8,master,Highly Likely to Select
+2,16,3,4,4,bachelor,Low Selection Probability
+3,16,10,9,10,bachelor,Highly Likely to Select
+3,2,4,1,2,master,Low Selection Probability
+1,11,6,1,3,master,Low Selection Probability
+8,5,8,7,6,master,Moderately Likely to Select
+6,10,5,3,8,phd,Moderately Likely to Select
+8,2,3,10,8,master,Moderately Likely to Select
+9,7,6,2,9,bachelor,Moderately Likely to Select
+5,13,4,9,7,master,Moderately Likely to Select
+3,13,9,3,2,phd,Low Selection Probability
+5,9,3,2,8,master,Low Selection Probability
+5,1,4,8,7,master,Moderately Likely to Select
+5,13,7,10,8,master,Moderately Likely to Select
+3,8,7,6,3,bachelor,Low Selection Probability
+10,2,4,6,7,bachelor,Moderately Likely to Select
+4,20,6,10,10,bachelor,Moderately Likely to Select
+9,7,3,7,9,phd,Moderately Likely to Select
+10,15,6,7,3,master,Moderately Likely to Select
+9,1,2,6,10,bachelor,Moderately Likely to Select
+2,5,8,4,6,phd,Moderately Likely to Select
+8,20,2,9,2,bachelor,Moderately Likely to Select
+8,11,7,6,2,bachelor,Moderately Likely to Select
+7,4,9,4,5,master,Moderately Likely to Select
+8,1,1,3,5,master,Low Selection Probability
+3,15,8,4,7,bachelor,Moderately Likely to Select
+6,4,7,3,2,bachelor,Low Selection Probability
+1,14,6,2,7,bachelor,Low Selection Probability
+7,11,6,5,5,bachelor,Moderately Likely to Select
+1,3,6,2,6,bachelor,Low Selection Probability
+9,14,9,6,8,bachelor,Highly Likely to Select
+1,10,2,3,10,bachelor,Low Selection Probability
+1,15,1,6,4,bachelor,Low Selection Probability
+7,5,6,10,7,highschool,Moderately Likely to Select
+2,13,10,9,6,bachelor,Moderately Likely to Select
+5,17,8,1,10,master,Moderately Likely to Select
+8,11,3,6,2,master,Low Selection Probability
+8,10,10,9,8,bachelor,Highly Likely to Select
+3,12,1,4,10,highschool,Low Selection Probability
+7,20,9,2,9,bachelor,Moderately Likely to Select
+3,10,1,4,5,bachelor,Low Selection Probability
+6,15,3,1,10,bachelor,Moderately Likely to Select
+6,14,8,3,4,bachelor,Moderately Likely to Select
+3,20,3,10,6,bachelor,Moderately Likely to Select
+7,14,4,9,8,master,Moderately Likely to Select
+3,3,8,10,3,bachelor,Moderately Likely to Select
+8,10,1,5,10,bachelor,Moderately Likely to Select
+10,18,6,6,1,master,Moderately Likely to Select
+4,14,1,3,4,bachelor,Low Selection Probability
+1,3,1,5,4,bachelor,Low Selection Probability
+4,20,8,8,1,bachelor,Moderately Likely to Select
+7,12,4,6,9,bachelor,Moderately Likely to Select
+4,18,1,4,3,master,Low Selection Probability
+6,1,10,2,5,bachelor,Moderately Likely to Select
+9,13,7,9,6,bachelor,Moderately Likely to Select
+1,3,5,1,8,bachelor,Low Selection Probability
+5,15,5,1,6,highschool,Low Selection Probability
+7,20,1,4,3,master,Low Selection Probability
+1,19,10,7,6,master,Moderately Likely to Select
+4,13,6,1,1,bachelor,Low Selection Probability
+6,14,9,9,4,bachelor,Moderately Likely to Select
+2,2,9,4,6,bachelor,Moderately Likely to Select
+10,7,8,3,7,master,Moderately Likely to Select
+5,15,5,1,10,bachelor,Moderately Likely to Select
+10,9,1,10,3,highschool,Moderately Likely to Select
+1,3,9,4,9,bachelor,Moderately Likely to Select
+6,17,1,9,7,bachelor,Moderately Likely to Select
+6,1,8,10,1,bachelor,Moderately Likely to Select
+4,16,5,6,2,highschool,Low Selection Probability
+8,12,3,6,1,bachelor,Low Selection Probability
+4,3,7,1,9,bachelor,Moderately Likely to Select
+8,10,7,10,9,bachelor,Highly Likely to Select
+8,6,9,2,7,master,Moderately Likely to Select
+5,11,7,6,10,highschool,Moderately Likely to Select
+4,9,3,2,3,bachelor,Low Selection Probability
+2,6,1,3,5,master,Low Selection Probability
+3,12,8,4,4,bachelor,Low Selection Probability
+3,6,3,5,7,master,Low Selection Probability
+4,16,8,9,9,master,Moderately Likely to Select
+4,9,8,4,2,bachelor,Low Selection Probability
+10,9,5,9,8,phd,Highly Likely to Select
+5,3,1,10,9,bachelor,Moderately Likely to Select
+4,19,10,3,10,bachelor,Moderately Likely to Select
+10,3,7,8,10,bachelor,Highly Likely to Select
+8,6,10,1,9,bachelor,Moderately Likely to Select
+6,0,5,9,10,master,Moderately Likely to Select
+6,11,8,9,7,master,Moderately Likely to Select
+8,12,9,10,9,master,Highly Likely to Select
+7,9,7,2,9,phd,Moderately Likely to Select
+10,14,7,4,3,master,Moderately Likely to Select
+10,12,1,8,4,master,Moderately Likely to Select
+8,20,4,7,2,bachelor,Moderately Likely to Select
+2,8,2,1,10,bachelor,Low Selection Probability
+9,8,2,5,3,highschool,Low Selection Probability

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In - AI Interview System</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css?v=3.1" />
+
+    <!-- Embedded High-Specificity Rules to Guarantee Exact Rendering Regardless of Browser Cache -->
+    <style>
+        .auth-segmented-control {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            background-color: #F1F5F9 !important;
+            border: 1px solid #E2E8F0 !important;
+            border-radius: 10px !important;
+            padding: 4px !important;
+            margin-bottom: 20px !important;
+            gap: 4px !important;
+        }
+        .auth-tab-btn {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 8px !important;
+            height: 42px !important;
+            padding: 0 12px !important;
+            border: none !important;
+            background: transparent !important;
+            border-radius: 8px !important;
+            font-size: 0.88rem !important;
+            font-weight: 600 !important;
+            color: #64748B !important;
+            cursor: pointer !important;
+            transition: all 0.18s ease !important;
+            font-family: inherit !important;
+            outline: none !important;
+            user-select: none !important;
+        }
+        .auth-tab-btn:hover {
+            color: #0F172A !important;
+            background-color: rgba(255, 255, 255, 0.6) !important;
+        }
+        .auth-tab-btn.active {
+            background-color: #FFFFFF !important;
+            color: #1769C2 !important;
+            font-weight: 700 !important;
+            box-shadow: 0 1px 3px rgba(8, 43, 80, 0.12), 0 1px 2px rgba(8, 43, 80, 0.08) !important;
+        }
+        .auth-alert-container {
+            min-height: 0;
+            margin-bottom: 4px;
+        }
+        .auth-alert {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 12px 14px;
+            border-radius: 8px;
+            font-size: 0.84rem;
+            line-height: 1.45;
+            margin-bottom: 18px;
+            box-sizing: border-box;
+            animation: authFadeIn 0.2s ease-out;
+        }
+        @keyframes authFadeIn {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .auth-alert.error {
+            background-color: #FEF2F2 !important;
+            border: 1px solid #FECACA !important;
+            color: #991B1B !important;
+        }
+        .auth-alert.success {
+            background-color: #ECFDF5 !important;
+            border: 1px solid #A7F3D0 !important;
+            color: #065F46 !important;
+        }
+        .auth-alert.info {
+            background-color: #EFF6FF !important;
+            border: 1px solid #BFDBFE !important;
+            color: #1E40AF !important;
+        }
+        .auth-alert-icon {
+            font-size: 1.05rem;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .auth-alert-body {
+            flex: 1;
+            font-weight: 500;
+            word-break: break-word;
+        }
+        .auth-switch-link-wrap {
+            text-align: center;
+            margin-top: 16px;
+            font-size: 0.85rem;
+            color: #64748B;
+        }
+        .auth-switch-link-wrap a {
+            color: #1769C2;
+            font-weight: 600;
+            text-decoration: none;
+            margin-left: 4px;
+        }
+        .auth-switch-link-wrap a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-screen-wrapper">
+        <div class="login-card">
+            <!-- Brand & Product Header -->
+            <div class="login-brand-header">
+                <div class="login-logo-wrap">
+                    <div class="four-square-logo login-logo" title="AI Interview System">
+                        <span class="sq-1"></span>
+                        <span class="sq-2"></span>
+                        <span class="sq-3"></span>
+                        <span class="sq-4"></span>
+                    </div>
+                </div>
+                <h1>
+                    AI Interview <span>System</span>
+                </h1>
+                <p>
+                    Enterprise Talent Management Portal
+                </p>
+            </div>
+
+            <!-- Modern Segmented Tab Switcher (Sign In vs Candidate Sign Up) -->
+            <div class="auth-segmented-control" id="authTabs" role="tablist">
+                <button type="button" class="auth-tab-btn active" id="tabSignInBtn" role="tab" aria-selected="true" aria-controls="loginForm">
+                    <span>🔑</span>
+                    <span>Sign In</span>
+                </button>
+                <button type="button" class="auth-tab-btn" id="tabRegisterBtn" role="tab" aria-selected="false" aria-controls="candidateRegisterForm">
+                    <span>📝</span>
+                    <span>Candidate Sign Up</span>
+                </button>
+            </div>
+
+            <!-- Dedicated Notification Area for Error / Success / Status Alerts -->
+            <div class="auth-alert-container">
+                <div id="authAlertBox" class="auth-alert" style="display:none;" role="alert">
+                    <span class="auth-alert-icon" id="authAlertIcon">⚠️</span>
+                    <div class="auth-alert-body" id="authAlertBody"></div>
+                </div>
+            </div>
+
+            <!-- 1. Sign In Form -->
+            <form id="loginForm" autocomplete="on">
+                <div class="login-input-group">
+                    <label for="username">Username or Corporate ID</label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username"
+                        placeholder="Enter your username" 
+                        autocomplete="username" 
+                        required 
+                    />
+                </div>
+
+                <div class="login-input-group">
+                    <label for="password">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password"
+                        placeholder="Enter your secure password" 
+                        autocomplete="current-password" 
+                        required 
+                    />
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="button login-submit-btn" id="signInSubmitBtn">
+                    Sign In to Portal &rarr;
+                </button>
+            </form>
+
+            <!-- 2. Candidate Sign Up Form -->
+            <form id="candidateRegisterForm" style="display:none;" autocomplete="on">
+                <div class="login-input-group">
+                    <label for="regName">Full Name <span style="color:#E5484D;">*</span></label>
+                    <input 
+                        type="text" 
+                        id="regName" 
+                        placeholder="e.g. Jane Doe" 
+                        autocomplete="name" 
+                        required 
+                    />
+                </div>
+
+                <div class="login-input-group">
+                    <label for="regEmail">Email Address <span style="color:#E5484D;">*</span></label>
+                    <input 
+                        type="email" 
+                        id="regEmail" 
+                        placeholder="e.g. jane.doe@example.com" 
+                        autocomplete="email" 
+                        required 
+                    />
+                </div>
+
+                <div class="login-input-group">
+                    <label for="regPhone">Phone Number</label>
+                    <input 
+                        type="tel" 
+                        id="regPhone" 
+                        placeholder="e.g. +1 555-0199" 
+                        autocomplete="tel" 
+                    />
+                </div>
+
+                <div class="login-input-group">
+                    <label for="regUsername">Choose Username <span style="color:#E5484D;">*</span></label>
+                    <input 
+                        type="text" 
+                        id="regUsername" 
+                        placeholder="e.g. janedoe" 
+                        autocomplete="username" 
+                        required 
+                    />
+                </div>
+
+                <div class="login-input-group">
+                    <label for="regPassword">Password <span style="color:#E5484D;">*</span></label>
+                    <input 
+                        type="password" 
+                        id="regPassword" 
+                        placeholder="Minimum 6 characters" 
+                        autocomplete="new-password" 
+                        required 
+                    />
+                </div>
+
+                <div class="login-input-group">
+                    <label for="regConfirmPassword">Confirm Password <span style="color:#E5484D;">*</span></label>
+                    <input 
+                        type="password" 
+                        id="regConfirmPassword" 
+                        placeholder="Re-enter your password" 
+                        autocomplete="new-password" 
+                        required 
+                    />
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="button login-submit-btn" id="regSubmitBtn">
+                    Create Candidate Account &rarr;
+                </button>
+
+                <!-- Return to Sign In Link -->
+                <div class="auth-switch-link-wrap">
+                    <span>Already registered?</span>
+                    <a href="javascript:void(0)" id="linkReturnSignIn">Sign In &rarr;</a>
+                </div>
+
+                <p class="auth-helper-note">
+                    ℹ️ Recruiter and Admin accounts are provisioned exclusively by system administrators.
+                </p>
+            </form>
+
+            <div class="login-footer-text">
+                AI Interview System &bull; Secure Enterprise Edition
+            </div>
+        </div>
+    </div>
+
+    <!-- Core Scripts -->
+    <script src="js/api.js?v=3.1"></script>
+    <script src="js/login.js?v=3.1"></script>
+</body>
+</html>

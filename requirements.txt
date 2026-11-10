@@ -1,0 +1,28 @@
+# Web Framework & Server
+fastapi
+uvicorn[standard]
+python-dotenv
+
+# Database (MongoDB Atlas)
+pymongo
+dnspython
+certifi
+
+# Validation & Settings
+pydantic
+pydantic-settings
+email-validator
+
+# Security & Authentication
+python-multipart
+passlib[bcrypt]
+bcrypt
+python-jose[cryptography]
+
+# Machine Learning & Data Processing
+scikit-learn
+joblib
+pandas
+
+# HTTP & API Client
+requests
