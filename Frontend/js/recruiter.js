@@ -1345,7 +1345,16 @@ async function synthesizeRecruiterReport(candId, candName) {
     } catch (err) {
         showAlert(err.message || 'Failed to synthesize AI report.', 'error');
         if (body) {
-            body.innerHTML = `<p style="color:var(--status-red); text-align:center; padding:20px;">Generation error: ${escapeHtml(err.message)}</p>`;
+            body.innerHTML = `
+                <div style="text-align:center; padding:32px 16px;">
+                    <div style="font-size:2.2rem; margin-bottom:10px;">⚠️</div>
+                    <h4 style="margin:0 0 8px; color:var(--dark-navy);">Unable to Generate Report</h4>
+                    <p style="font-size:0.88rem; color:var(--secondary-text); margin-bottom:18px; max-width:440px; margin-left:auto; margin-right:auto; line-height:1.45;">
+                        ${escapeHtml(err.message || 'Error occurred while generating report.')}
+                    </p>
+                    <button type="button" class="button btn-secondary" onclick="closeRecReportModal()">Close</button>
+                </div>
+            `;
         }
     }
 }
@@ -1426,7 +1435,10 @@ function renderRecReportContent(report, candId, candName) {
             ` : ''}
 
             <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
-                <span style="font-size:0.78rem; color:var(--secondary-text);">Report Date: ${report.created_at ? new Date(report.created_at).toLocaleString() : 'Just now'}</span>
+                <span style="font-size:0.78rem; color:var(--secondary-text);">
+                    Report Date: ${report.created_at ? new Date(report.created_at).toLocaleString() : 'Just now'}
+                    ${content.ai_provider ? ` • <strong style="color:var(--primary-blue);">${escapeHtml(content.ai_provider)}</strong>` : ''}
+                </span>
                 <button type="button" class="button btn-secondary btn-sm" onclick="synthesizeRecruiterReport('${candId}', '${escapeHtml(candName)}')">
                     <span>↻</span> Regenerate Report
                 </button>

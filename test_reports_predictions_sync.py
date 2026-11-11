@@ -267,5 +267,98 @@ class TestPredictionHiringStatusImmutability(unittest.TestCase):
         self.assertNotEqual(candidate_data["status"], res["class"])
 
 
+class TestGoogleGeminiIntegration(unittest.TestCase):
+    def test_10_gemini_prompt_construction_and_grounding(self):
+        """Verify Gemini evaluation prompt embeds verified feedback and strict non-hallucination rules."""
+        from Backend.app.services.gemini_service import build_gemini_evaluation_prompt
+
+        candidate = {"name": "Jane Developer", "email": "jane@example.com", "status": "interviewed"}
+        interviews = [{"round": 1, "scheduled_at": "2026-11-10T14:00:00Z", "status": "completed"}]
+        feedbacks = [{
+            "technical_score": 9,
+            "communication_score": 8,
+            "problem_solving_score": 9,
+            "strengths": "Exceptional system design and algorithmic depth",
+            "weaknesses": "Could elaborate more on distributed cache invalidation",
+            "comments": "Strong analytical candidate with clear articulation."
+        }]
+        ground_truth = {
+            "avg_tech": 9.0,
+            "avg_comm": 8.0,
+            "avg_prob": 9.0,
+            "overall_avg": 8.7,
+            "overall_pct": 87,
+            "recommendation": "Strong Hire"
+        }
+
+        prompt = build_gemini_evaluation_prompt(candidate, interviews, feedbacks, ground_truth)
+        self.assertIn("Jane Developer", prompt)
+        self.assertIn("jane@example.com", prompt)
+        self.assertIn("Technical Competence Average: 9.0 / 10", prompt)
+        self.assertIn("Communication & Clarity Average: 8.0 / 10", prompt)
+        self.assertIn("Overall Competency Composite: 8.7 / 10 (87%)", prompt)
+        self.assertIn("Exceptional system design", prompt)
+        self.assertIn("distributed cache invalidation", prompt)
+        self.assertIn("DO NOT fabricate or assume technologies", prompt)
+        self.assertIn("DO NOT recalculate or modify the numerical scores", prompt)
+
+    def test_11_gemini_service_fallback_on_unconfigured_key(self):
+        """Verify that when Gemini API key is missing or empty, service returns None triggering fallback."""
+        from unittest.mock import patch
+        from Backend.app.services import gemini_service
+
+        with patch.object(gemini_service.settings, "GEMINI_API_KEY", ""):
+            res = gemini_service.generate_candidate_evaluation_report(
+                candidate={"name": "Test"},
+                interviews=[],
+                feedbacks=[{"technical_score": 8}],
+                ground_truth={"avg_tech": 8.0, "recommendation": "Recommended"}
+            )
+            self.assertIsNone(res)
+
+    def test_12_gemini_service_missing_feedback_handling(self):
+        """Verify service returns None if feedback list is empty."""
+        from Backend.app.services import gemini_service
+
+        res = gemini_service.generate_candidate_evaluation_report(
+            candidate={"name": "No Feedback Cand"},
+            interviews=[],
+            feedbacks=[],
+            ground_truth={}
+        )
+        self.assertIsNone(res)
+
+    def test_13_report_endpoint_pending_when_no_feedback(self):
+        """Verify report generation endpoint produces Pending Evaluation and bypasses Gemini when no feedback exists."""
+        from unittest.mock import patch
+        from Backend.app.routers.report import generate_report
+
+        mock_candidate = {"_id": "test_cand_id_123", "name": "No Feedback Cand", "status": "applied"}
+        
+        with patch("Backend.app.routers.report.get_candidates_collection") as mock_cand_col, \
+             patch("Backend.app.routers.report.get_interviews_collection") as mock_inv_col, \
+             patch("Backend.app.routers.report.get_feedback_collection") as mock_fb_col, \
+             patch("Backend.app.routers.report.get_reports_collection") as mock_rep_col, \
+             patch("Backend.app.routers.report.create_notification"), \
+             patch("Backend.app.services.gemini_service.generate_candidate_evaluation_report") as mock_gemini:
+            
+            mock_cand_col.return_value.find_one.return_value = mock_candidate
+            mock_inv_col.return_value.find.return_value = []
+            mock_fb_col.return_value.find_one.return_value = None
+            mock_fb_col.return_value.find.return_value = []
+            mock_rep_col.return_value.insert_one.return_value.inserted_id = "mock_report_id_1"
+
+            admin_user = {"id": "admin_1", "role": "admin", "username": "admin"}
+            rep = generate_report("test_cand_id_123", current_user=admin_user)
+            
+            content = rep["content"]
+            self.assertEqual(content["recommendation"], "Pending Evaluation")
+            self.assertIsNone(content["overall_score"])
+            self.assertIsNone(content["average_scores"]["technical"])
+            self.assertEqual(content["completed_evaluations"], 0)
+            # Gemini must NOT be called when no feedback exists to prevent hallucination
+            mock_gemini.assert_not_called()
+
+
 if __name__ == "__main__":
     unittest.main()

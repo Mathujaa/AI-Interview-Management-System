@@ -19,6 +19,7 @@ class Settings(BaseSettings):
 
     # LLM / GenAI settings
     GEMINI_API_KEY: str = ""
+    GEMINI_MODEL: str = "gemini-3.8-flash"
     LLM_API_URL: str = ""
 
 settings = Settings()

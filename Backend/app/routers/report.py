@@ -18,6 +18,7 @@ from .. import models, schemas
 from ..auth import get_current_user
 from ..config import settings
 from .notifications import create_notification
+from ..services import gemini_service
 
 router = APIRouter()
 
@@ -58,80 +59,107 @@ def generate_report(candidate_id: str, current_user: Dict[str, Any] = Depends(ge
         if fb:
             feedbacks.append(fb)
 
-    # Build prompt
-    prompt = f"Generate an interview evaluation report for candidate {candidate.get('name')} (email: {candidate.get('email')}).\n"
-    for i, inv in enumerate(interviews, start=1):
-        prompt += f"Interview {i}: scheduled at {inv.get('scheduled_at')}, round {inv.get('round')}, status {inv.get('status')}.\n"
-    for i, fb in enumerate(feedbacks, start=1):
-        prompt += f"Feedback {i}: technical {fb.get('technical_score')}, communication {fb.get('communication_score')}, problem solving {fb.get('problem_solving_score')}. Strengths: {fb.get('strengths') or ''}. Weaknesses: {fb.get('weaknesses') or ''}. Comments: {fb.get('comments') or ''}\n"
-
-    endpoint = os.getenv("LLM_ENDPOINT") or os.getenv("LLM_API_URL") or settings.LLM_API_URL
-    api_key = os.getenv("LLM_API_KEY") or os.getenv("GEMINI_API_KEY") or settings.GEMINI_API_KEY
-
-    report_content = None
-    if endpoint and api_key and not endpoint.startswith("https://api.example.com"):
-        headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
-        payload = {"prompt": prompt, "max_tokens": 1024}
+    # Also search by candidate_id if no feedback found through interviews
+    if not feedbacks:
+        cand_fb_query = [{"candidate_id": norm_cand_id}, {"candidate_id": str(candidate_id)}]
+        if candidate.get("legacy_id"):
+            cand_fb_query.append({"candidate_id": candidate["legacy_id"]})
+            cand_fb_query.append({"candidate_id": str(candidate["legacy_id"])})
         try:
-            response = requests.post(endpoint, headers=headers, json=payload, timeout=10)
-            if response.ok:
-                result_json = response.json()
-                report_content = result_json.get("generated_text") or result_json.get("content") or str(result_json)
+            direct_fbs = list(feedback_col.find({"$or": cand_fb_query}))
+            if direct_fbs:
+                feedbacks.extend(direct_fbs)
         except Exception:
-            report_content = None
+            pass
 
-    if not report_content:
-        # Structured evaluation synthesis based strictly on real candidate feedback
-        if not feedbacks:
+    if not feedbacks:
+        # When no feedback scorecards exist: do not call Gemini to avoid hallucination.
+        # Synthesize clean Pending Evaluation report with null scores, no fake strengths/weaknesses.
+        report_content = {
+            "candidate_name": candidate.get("name"),
+            "candidate_email": candidate.get("email"),
+            "overall_status": candidate.get("status", "applied"),
+            "interviews_evaluated": len(interviews),
+            "completed_evaluations": 0,
+            "average_scores": {
+                "technical": None,
+                "communication": None,
+                "problem_solving": None
+            },
+            "overall_score": None,
+            "overall_percentage": None,
+            "strengths": [],
+            "growth_areas": [],
+            "recommendation": "Pending Evaluation",
+            "executive_summary": f"Evaluation for {candidate.get('name')} is pending. No interview feedback has been recorded yet. Scores and insights will appear after interview completion.",
+            "ai_provider": "Deterministic System Synthesis (Local Fallback)"
+        }
+    else:
+        # Calculate ground-truth numerical score averages strictly from verified MongoDB feedback records
+        tech_scores = [float(f["technical_score"]) for f in feedbacks if f.get("technical_score") is not None]
+        comm_scores = [float(f["communication_score"]) for f in feedbacks if f.get("communication_score") is not None]
+        prob_scores = [float(f["problem_solving_score"]) for f in feedbacks if f.get("problem_solving_score") is not None]
+
+        avg_tech = round(sum(tech_scores) / len(tech_scores), 1) if tech_scores else None
+        avg_comm = round(sum(comm_scores) / len(comm_scores), 1) if comm_scores else None
+        avg_prob = round(sum(prob_scores) / len(prob_scores), 1) if prob_scores else None
+
+        valid_avgs = [a for a in [avg_tech, avg_comm, avg_prob] if a is not None]
+        overall_avg = round(sum(valid_avgs) / len(valid_avgs), 1) if valid_avgs else None
+        overall_percent = round((overall_avg / 10.0) * 100) if overall_avg is not None else None
+
+        # Determine objective recommendation bracket based strictly on actual scores
+        if overall_avg is None:
+            baseline_rec = "Pending Evaluation"
+        elif overall_avg >= 8.0 and (avg_tech is None or avg_tech >= 7.5):
+            baseline_rec = "Strong Hire"
+        elif overall_avg >= 6.0:
+            baseline_rec = "Recommended"
+        elif overall_avg >= 4.0:
+            baseline_rec = "Under Review"
+        else:
+            baseline_rec = "Needs Improvement"
+
+        ground_truth = {
+            "avg_tech": avg_tech,
+            "avg_comm": avg_comm,
+            "avg_prob": avg_prob,
+            "overall_avg": overall_avg,
+            "overall_pct": overall_percent,
+            "recommendation": baseline_rec
+        }
+
+        # Attempt Google Gemini LLM synthesis
+        gemini_result = None
+        try:
+            gemini_result = gemini_service.generate_candidate_evaluation_report(
+                candidate, interviews, feedbacks, ground_truth
+            )
+        except Exception as e:
+            gemini_result = None
+
+        if gemini_result:
             report_content = {
                 "candidate_name": candidate.get("name"),
                 "candidate_email": candidate.get("email"),
                 "overall_status": candidate.get("status", "applied"),
                 "interviews_evaluated": len(interviews),
-                "completed_evaluations": 0,
+                "completed_evaluations": len(feedbacks),
                 "average_scores": {
-                    "technical": None,
-                    "communication": None,
-                    "problem_solving": None
+                    "technical": avg_tech,
+                    "communication": avg_comm,
+                    "problem_solving": avg_prob
                 },
-                "overall_score": None,
-                "overall_percentage": None,
-                "strengths": [],
-                "growth_areas": [],
-                "recommendation": "Pending Evaluation",
-                "executive_summary": f"Evaluation for {candidate.get('name')} is pending. No interview feedback has been recorded yet. Scores and insights will appear after interview completion."
+                "overall_score": overall_avg,
+                "overall_percentage": overall_percent,
+                "strengths": gemini_result.get("strengths", []),
+                "growth_areas": gemini_result.get("growth_areas", []),
+                "recommendation": gemini_result.get("recommendation", baseline_rec),
+                "executive_summary": gemini_result.get("executive_summary", ""),
+                "ai_provider": gemini_result.get("ai_provider", f"Google Gemini ({settings.GEMINI_MODEL})")
             }
         else:
-            # Extract valid non-null numerical scores (0-10 scale)
-            tech_scores = [float(f["technical_score"]) for f in feedbacks if f.get("technical_score") is not None]
-            comm_scores = [float(f["communication_score"]) for f in feedbacks if f.get("communication_score") is not None]
-            prob_scores = [float(f["problem_solving_score"]) for f in feedbacks if f.get("problem_solving_score") is not None]
-
-            avg_tech = round(sum(tech_scores) / len(tech_scores), 1) if tech_scores else None
-            avg_comm = round(sum(comm_scores) / len(comm_scores), 1) if comm_scores else None
-            avg_prob = round(sum(prob_scores) / len(prob_scores), 1) if prob_scores else None
-
-            # Calculate overall average from available competency averages
-            valid_avgs = [a for a in [avg_tech, avg_comm, avg_prob] if a is not None]
-            if valid_avgs:
-                overall_avg = round(sum(valid_avgs) / len(valid_avgs), 1)
-                overall_percent = round((overall_avg / 10.0) * 100)
-            else:
-                overall_avg = None
-                overall_percent = None
-
-            # Determine objective recommendation based strictly on actual scores
-            if overall_avg is None:
-                rec = "Pending Evaluation"
-            elif overall_avg >= 8.0 and (avg_tech is None or avg_tech >= 7.5):
-                rec = "Strong Hire"
-            elif overall_avg >= 6.0:
-                rec = "Recommended"
-            elif overall_avg >= 4.0:
-                rec = "Under Review"
-            else:
-                rec = "Needs Improvement"
-
+            # Seamless deterministic local fallback
             strengths_list = [f.get("strengths") for f in feedbacks if f.get("strengths")]
             weaknesses_list = [f.get("weaknesses") for f in feedbacks if f.get("weaknesses")]
 
@@ -150,8 +178,9 @@ def generate_report(candidate_id: str, current_user: Dict[str, Any] = Depends(ge
                 "overall_percentage": overall_percent,
                 "strengths": strengths_list if strengths_list else ["Demonstrated core competence and domain understanding across interview rounds."],
                 "growth_areas": weaknesses_list if weaknesses_list else ["Continue expanding domain depth and advanced problem exploration."],
-                "recommendation": rec,
-                "executive_summary": f"Evaluation summary for {candidate.get('name')} based on {len(feedbacks)} completed interview evaluation(s). Overall Score: {overall_avg if overall_avg is not None else 'Pending'}/10 ({overall_percent if overall_percent is not None else 0}%). Final recommendation: {rec}."
+                "recommendation": baseline_rec,
+                "executive_summary": f"Evaluation summary for {candidate.get('name')} based on {len(feedbacks)} completed interview evaluation(s). Overall Score: {overall_avg if overall_avg is not None else 'Pending'}/10 ({overall_percent if overall_percent is not None else 0}%). Final recommendation: {baseline_rec}.",
+                "ai_provider": "Deterministic System Synthesis (Local Fallback)"
             }
 
     now = datetime.now(timezone.utc)

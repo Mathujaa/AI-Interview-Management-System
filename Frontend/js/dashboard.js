@@ -1608,19 +1608,20 @@ function renderReportDisplay(report) {
     const cand = candidatesCache.find((c) => String(c.id) === String(report.candidate_id));
     if (candNameEl) candNameEl.textContent = cand ? `${cand.name} (${cand.email})` : `Candidate #${report.candidate_id}`;
 
+    const content = report.content;
+
     if (dateEl) {
         try {
             const d = new Date(report.created_at);
             const dateStr = !isNaN(d.getTime()) 
                 ? d.toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })
                 : report.created_at;
-            dateEl.textContent = `Generated: ${dateStr}`;
+            const providerStr = (content && typeof content === 'object' && content.ai_provider) ? ` • ${content.ai_provider}` : '';
+            dateEl.textContent = `Generated: ${dateStr}${providerStr}`;
         } catch (e) {
             dateEl.textContent = `Generated: ${report.created_at}`;
         }
     }
-
-    const content = report.content;
 
     if (typeof content === 'object' && content !== null) {
         const scores = content.average_scores || {};
